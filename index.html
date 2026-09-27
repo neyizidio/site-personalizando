@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalizando Por Amor • Feito com Carinho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fontes delicadas e elegantes -->
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              pearl: '#FAF6F0',     /* Tom claro e suave que substitui o branco */
+              ivory: '#F4EDE2',     /* Fundo principal marfim acolhedor */
+              sand: '#EAE0D3',      /* Fundo secundário areia suave */
+              blush: '#E3CFC2',     /* Destaque rosê chá delicado */
+              roseGold: '#A86E58',  /* Ouro rosê do logo */
+              deepRose: '#87533E',  /* Cobre profundo para hover e destaques */
+              mocha: '#3D2E28',     /* Marrom café suave para títulos */
+              taupe: '#5E4B43',     /* Marrom médio suave para textos */
+              whatsapp: '#25D366'   /* Verde original oficial do WhatsApp */
+            }
+          },
+          fontFamily: {
+            script: ['"Alex Brush"', 'cursive'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* Transição suave e delicada para o Carrossel */
+    .carousel-slide {
+      transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .carousel-slide .slide-text {
+      transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(18px);
+      opacity: 0;
+    }
+    .carousel-slide .slide-image-box {
+      transition: transform 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: scale(0.95) translateY(10px);
+      opacity: 0;
+    }
+    .carousel-slide.active-slide .slide-text {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .carousel-slide.active-slide .slide-image-box {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    /* Centraliza perfeitamente o logo inteiro sem fundo */
+    .logo-perfeito {
+      object-fit: cover;
+      object-position: 51.2% 50%;
+      mix-blend-mode: multiply;
+      filter: contrast(1.08);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 72%);
+      mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 72%);
+    }
+
+    /* Degradê Oficial Original do Instagram */
+    .bg-instagram-original {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    }
+  </style>
+</head>
+<body class="bg-brand-ivory text-brand-taupe font-sans antialiased text-base relative overflow-x-hidden">
+
+  <!-- Símbolos SVG Reutilizáveis: Ícones e Desenhos à Mão (Somente Traços) -->
+  <svg class="hidden" aria-hidden="true">
+    <!-- Ícone Oficial do WhatsApp -->
+    <symbol id="icone-whatsapp" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </symbol>
+
+    <!-- Ícone Oficial do Instagram -->
+    <symbol id="icone-instagram" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </symbol>
+
+    <!-- 1. DESENHO À MÃO: LOGO DO SITE EM TRAÇOS FINOS (Moldura + Livro + Coração + Notas Musicais) -->
+    <symbol id="desenho-logo" viewBox="0 0 140 140" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke-width="1.2" d="M 18 56 A 54 54 0 0 1 122 56 C 129 61 129 79 122 84 A 54 54 0 0 1 18 84 C 11 79 11 61 18 56 Z" />
+      <path stroke-width="0.9" d="M 23 58 A 48 48 0 0 1 117 58 M 117 82 A 48 48 0 0 1 23 82" />
+      <g transform="rotate(-6 70 46)">
+        <path stroke-width="1.2" d="M 70 30 C 60 27 48 29 42 32 L 42 62 C 48 59 60 57 70 61 Z" />
+        <path stroke-width="1.2" d="M 70 30 C 80 27 92 29 98 32 L 98 62 C 92 59 80 57 70 61 Z" />
+        <path stroke-width="0.9" d="M 40 35 L 40 65 C 48 62 60 60 70 64 C 80 60 92 62 100 65 L 100 35" />
+        <path stroke-width="0.8" d="M 42 67 C 52 64 62 63 70 66 C 78 63 88 64 98 67" />
+        <path stroke-width="1.1" d="M 56 42 C 54 38 48 39 48 44 C 48 49 56 52 56 54 C 56 52 64 49 64 44 C 64 39 58 38 56 42 Z" />
+        <path stroke-width="1.1" d="M 80 51 L 80 41 L 88 39 L 88 49" />
+        <circle cx="78.5" cy="51.5" r="1.8" stroke-width="1.1" />
+        <circle cx="86.5" cy="49.5" r="1.8" stroke-width="1.1" />
+        <path stroke-width="0.9" d="M 76 39 L 76 33 L 80 34" />
+        <circle cx="74.8" cy="39.5" r="1.2" stroke-width="0.9" />
+      </g>
+      <path stroke-width="1.1" d="M 20 74 C 28 66 35 79 44 73 C 52 68 58 78 68 72 C 78 67 84 78 94 72 C 103 67 111 76 120 71" />
+      <path stroke-width="0.9" d="M 46 88 L 94 88" stroke-dasharray="3 4" />
+      <path stroke-width="1" d="M 70 101 C 68.5 98.5 65 99 65 102 C 65 105 70 107 70 108.5 C 70 107 75 105 75 102 C 75 99 71.5 98.5 70 101 Z" />
+    </symbol>
+
+    <!-- 2. DESENHO À MÃO: CADERNO / AGENDA COM ESPIRAL E TASSEL -->
+    <symbol id="desenho-caderno" viewBox="0 0 120 140" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="28" y="16" width="68" height="92" rx="6" stroke-width="1.3" />
+      <path stroke-width="1" d="M 96 22 L 100 22 C 102 22 103 24 103 26 L 103 106 C 103 108 101 110 99 110 L 34 110" />
+      <path stroke-width="1.1" d="M 86 16 L 96 26 M 86 108 L 96 98" />
+      <path stroke-width="1.2" d="M 22 26 C 26 23 32 25 32 28 M 22 38 C 26 35 32 37 32 40 M 22 50 C 26 47 32 49 32 52 M 22 62 C 26 59 32 61 32 64 M 22 74 C 26 71 32 73 32 76 M 22 86 C 26 83 32 85 32 88 M 22 98 C 26 95 32 97 32 100" />
+      <rect x="42" y="34" width="42" height="22" rx="3" stroke-width="1" />
+      <path stroke-width="1.1" d="M 63 72 C 60.5 68 54 69 54 74.5 C 54 80 63 83.5 63 86 C 63 83.5 72 80 72 74.5 C 72 69 65.5 68 63 72 Z" />
+      <path stroke-width="1.1" d="M 58 108 C 58 115 54 120 55 126" />
+      <circle cx="55" cy="128" r="2.2" stroke-width="1" />
+      <path stroke-width="1" d="M 55 130 L 51 138 M 55 130 L 55 139 M 55 130 L 59 138" />
+    </symbol>
+
+    <!-- 3. DESENHO À MÃO: BÍBLIA / CADERNO COM FECHO E LAÇO -->
+    <symbol id="desenho-biblia" viewBox="0 0 120 140" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="24" y="18" width="70" height="94" rx="5" stroke-width="1.3" />
+      <path stroke-width="1" d="M 32 18 L 32 112" />
+      <!-- Placa moldurada superior -->
+      <rect x="42" y="30" width="40" height="18" rx="2" stroke-width="1" />
+      <path stroke-width="0.8" d="M 47 36 L 77 36 M 52 42 L 72 42" />
+      <!-- Fecho lateral desenhado à mão -->
+      <path stroke-width="1.2" d="M 94 56 L 76 56 C 71 56 71 68 76 68 L 94 68" />
+      <circle cx="77" cy="62" r="2.5" stroke-width="1" />
+      <!-- Placa inferior de nome -->
+      <rect x="45" y="84" width="34" height="12" rx="2" stroke-width="1" />
+      <!-- Marcador duplo com pérolas -->
+      <path stroke-width="1" d="M 52 112 C 51 120 48 126 48 132" />
+      <circle cx="48" cy="122" r="2" stroke-width="1" />
+      <circle cx="48" cy="127" r="2" stroke-width="1" />
+      <path stroke-width="1" d="M 48 130 L 44 137 M 48 130 L 48 138 M 48 130 L 52 137" />
+    </symbol>
+
+    <!-- 4. DESENHO À MÃO: CORAÇÃO ORGÂNICO COM TRAÇO CONTÍNUO -->
+    <symbol id="desenho-coracao" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke-width="1.3" d="M 50 32 C 42 16 16 20 18 42 C 20 62 46 74 50 82 C 54 74 80 62 82 42 C 84 20 58 16 50 32 Z" />
+      <path stroke-width="0.8" d="M 48 34 C 41 21 21 24 22 42 C 23 58 44 69 50 77" />
+      <path stroke-width="0.9" d="M 74 34 C 76 38 76 43 73 48" />
+    </symbol>
+
+    <!-- 5. DESENHO À MÃO: TRIO DE CORAÇÕES DELICADOS -->
+    <symbol id="desenho-coracoes-duplos" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke-width="1.2" d="M 38 42 C 33 31 15 34 16 49 C 17 63 35 71 38 77 C 41 71 59 63 60 49 C 61 34 43 31 38 42 Z" />
+      <path stroke-width="1.1" d="M 70 26 C 67 19 55 21 56 31 C 57 40 68 45 70 49 C 72 45 83 40 84 31 C 85 21 73 19 70 26 Z" />
+      <path stroke-width="1" d="M 24 18 C 22 13 14 14 14 21 C 14 27 22 31 24 34 C 26 31 34 27 34 21 C 34 14 26 13 24 18 Z" />
+    </symbol>
+  </svg>
+
+  <!-- CAMADA EXCLUSIVA DE TRÁS DA PÁGINA COM ALTO VOLUME DE DESENHOS FEITOS À MÃO -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden text-brand-roseGold" aria-hidden="true">
+    <svg class="w-full h-full opacity-[0.19]">
+      <defs>
+        <pattern id="padrao-desenhado-a-mao" width="320" height="320" patternUnits="userSpaceOnUse">
+          <!-- Logos do site desenhados à mão (3 por bloco em diferentes escalas e ângulos) -->
+          <use href="#desenho-logo" x="10" y="10" width="95" height="95" transform="rotate(-7 57 57)" />
+          <use href="#desenho-logo" x="195" y="155" width="90" height="90" transform="rotate(8 240 200)" />
+          <use href="#desenho-logo" x="75" y="215" width="75" height="75" transform="rotate(-4 112 252)" />
+
+          <!-- Cadernos e Bíblias desenhados à mão (4 por bloco) -->
+          <use href="#desenho-caderno" x="175" y="8" width="82" height="95" transform="rotate(9 216 55)" />
+          <use href="#desenho-biblia" x="95" y="85" width="80" height="92" transform="rotate(-8 135 131)" />
+          <use href="#desenho-caderno" x="8" y="145" width="78" height="90" transform="rotate(6 47 190)" />
+          <use href="#desenho-biblia" x="225" y="225" width="78" height="90" transform="rotate(-10 264 270)" />
+
+          <!-- Corações simples e triplos espalhados entre os espaços (9 por bloco) -->
+          <use href="#desenho-coracao" x="115" y="12" width="46" height="46" transform="rotate(-14 138 35)" />
+          <use href="#desenho-coracoes-duplos" x="255" y="5" width="60" height="60" transform="rotate(12 285 35)" />
+          <use href="#desenho-coracao" x="265" y="95" width="44" height="44" transform="rotate(-9 287 117)" />
+          <use href="#desenho-coracoes-duplos" x="18" y="95" width="56" height="56" transform="rotate(-6 46 123)" />
+          <use href="#desenho-coracao" x="175" y="105" width="42" height="42" transform="rotate(15 196 126)" />
+          <use href="#desenho-coracoes-duplos" x="145" y="235" width="64" height="64" transform="rotate(7 177 267)" />
+          <use href="#desenho-coracao" x="8" y="255" width="48" height="48" transform="rotate(-12 32 279)" />
+          <use href="#desenho-coracao" x="82" y="170" width="36" height="36" transform="rotate(18 100 188)" />
+          <use href="#desenho-coracao" x="280" y="175" width="35" height="35" transform="rotate(-15 297 192)" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#padrao-desenhado-a-mao)" />
+    </svg>
+  </div>
+
+  <!-- CABEÇALHO -->
+  <header class="bg-brand-ivory/85 backdrop-blur-md border-b border-brand-roseGold/25 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex flex-col lg:flex-row items-center justify-between gap-4">
+      
+      <!-- Logo Inteiro + Nome Delicado -->
+      <a href="#" class="flex flex-col sm:flex-row items-center text-center sm:text-left gap-3 sm:gap-5 group">
+        
+        <div class="w-32 h-32 sm:w-36 sm:h-36 flex items-center justify-center flex-shrink-0">
+          <img src="Logo_2.jpg" onerror="this.onerror=null;this.src='Logo.jpg';" 
+               alt="Logo Personalizando Por Amor" 
+               class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-300">
+        </div>
+
+        <div class="flex flex-col justify-center">
+          <!-- Escrito na mesma linha com fonte leve e delicada -->
+          <div class="whitespace-nowrap flex items-baseline justify-center sm:justify-start gap-2 sm:gap-2.5 leading-none mb-1.5">
+            <span class="font-script text-3xl sm:text-4xl lg:text-[44px] text-brand-roseGold font-normal">
+              Personalizando
+            </span>
+            <span class="font-serif text-lg sm:text-2xl lg:text-[26px] font-medium uppercase tracking-[0.18em] text-brand-deepRose">
+              POR AMOR
+            </span>
+          </div>
+
+          <!-- Subtítulo Feito com Carinho e Corações -->
+          <div class="font-serif italic text-lg sm:text-2xl text-brand-roseGold font-medium tracking-wide mb-1.5 flex items-center justify-center sm:justify-start gap-2">
+            <span class="text-brand-deepRose not-italic text-base sm:text-xl">♥</span>
+            <span>Feito com Carinho</span>
+            <span class="text-brand-deepRose not-italic text-base sm:text-xl">♥</span>
+          </div>
+
+          <!-- Linha de produtos limpa -->
+          <span class="text-[11px] sm:text-xs uppercase tracking-[0.15em] text-brand-taupe/90 font-normal block">
+            Bíblias • Hinários • Agendas • Cartões
+          </span>
+        </div>
+      </a>
+
+      <!-- Navegação e Botão do WhatsApp -->
+      <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <nav class="flex items-center space-x-4 sm:space-x-6 text-xs uppercase tracking-widest font-medium text-brand-mocha">
+          <a href="#destaques" class="hover:text-brand-roseGold transition-colors">Trabalhos</a>
+          <a href="#produtos" class="hover:text-brand-roseGold transition-colors">Catálogo</a>
+          <a href="#como-funciona" class="hover:text-brand-roseGold transition-colors">Como Pedir</a>
+          <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="hover:text-brand-roseGold transition-colors inline-flex items-center gap-1.5">
+            <span class="w-5 h-5 rounded-md bg-instagram-original text-white flex items-center justify-center shadow-sm">
+              <svg class="w-3.5 h-3.5 fill-current"><use href="#icone-instagram"></use></svg>
+            </span>
+            <span>Instagram</span>
+          </a>
+        </nav>
+
+        <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Vim%20pelo%20site%20Personalizando%20Por%20Amor%20e%20gostaria%20de%20um%20or%C3%A7amento." 
+           target="_blank" rel="noopener noreferrer"
+           class="bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl pl-3 pr-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition shadow-sm flex items-center gap-2.5 whitespace-nowrap">
+          <span class="w-7 h-7 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+            <svg class="w-4 h-4 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          </span>
+          <span>Fale Conosco</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- BANNER CARROSSEL COM AS 3 IMAGENS DO MESMO TAMANHO E TRANSIÇÃO SUAVE -->
+  <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30">
+    <div class="relative w-full min-h-[680px] sm:min-h-[600px] lg:min-h-[610px]">
+
+      <!-- SLIDE 1: Bíblia em Strass com Fecho -->
+      <div class="carousel-slide active-slide absolute inset-0 opacity-100 visible z-10 flex items-center" data-slide="0">
+        <img src="WhatsApp Image 2026-09-27 at 11.53.16.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60"></div>
+
+        <div class="relative z-20 max-w-7xl mx-auto w-full px-6 sm:px-14 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-xs sm:text-sm uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-4">
+              ★ Destaque • Acabamento Luxo em Strass
+            </span>
+            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-4 text-brand-deepRose">
+              Bíblia Sagrada Revestida em Strass com Fecho Metálico
+            </h2>
+            <p class="text-base sm:text-lg text-brand-taupe leading-relaxed mb-6">
+              Peça exclusiva confeccionada artesanalmente com manta de strass de alto brilho e faixas em tom rosê gold. Acompanha moldura superior trabalhada, placa dourada espelhada gravada com o nome, fecho metálico resistente e duplo marcador com pérolas, ponto de luz e tassel.
+            </p>
+            <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-7 text-xs sm:text-sm font-medium text-brand-mocha">
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Placa com Nome Gravado</span>
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Fecho Metálico</span>
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Pingente Tassel & Pérolas</span>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20modelo%20de%20B%C3%ADblia%20em%20Strass%20com%20Fecho." 
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3.5 pr-8 py-3 rounded-full shadow-md transition">
+              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+              </span>
+              <span>Quero Encomendar com Carinho</span>
+            </a>
+          </div>
+
+          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+            <div class="relative w-[300px] h-[340px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center">
+              <img src="WhatsApp Image 2026-09-27 at 11.53.16.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+              <img src="WhatsApp Image 2026-09-27 at 11.53.16.jpeg" alt="Bíblia Sagrada em Strass com Fecho" 
+                   class="relative z-10 w-full h-full object-contain rounded-xl">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Kit Musicista (Bíblia e Hinário com Teclado) -->
+      <div class="carousel-slide absolute inset-0 opacity-0 invisible z-0 flex items-center" data-slide="1">
+        <img src="WhatsApp Image 2026-09-27 at 11.53.15.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60"></div>
+
+        <div class="relative z-20 max-w-7xl mx-auto w-full px-6 sm:px-14 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-xs sm:text-sm uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-4">
+              ★ Kit Especial Musicista & Organista
+            </span>
+            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-4 text-brand-deepRose">
+              Bíblia Sagrada e Hinário + Caixa Presente e Cartão
+            </h2>
+            <p class="text-base sm:text-lg text-brand-taupe leading-relaxed mb-6">
+              Personalização temática com capa em glitter perolado e aplique em relevo de teclado musical contornado em strass dourado. Inclui cantoneiras metálicas, placas gravadas, marcador com tassel e acompanha caixa personalizada e cartão com dedicatória especial.
+            </p>
+            <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-7 text-xs sm:text-sm font-medium text-brand-mocha">
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Aplique Musical de Teclado</span>
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Caixa Personalizada Inclusa</span>
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Cartão com Mensagem</span>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20Kit%20B%C3%ADblia%20e%20Hin%C3%A1rio%20com%20Teclado%20e%20Caixa." 
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3.5 pr-8 py-3 rounded-full shadow-md transition">
+              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+              </span>
+              <span>Quero Encomendar Este Kit</span>
+            </a>
+          </div>
+
+          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+            <div class="relative w-[300px] h-[340px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center">
+              <img src="WhatsApp Image 2026-09-27 at 11.53.15.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+              <img src="WhatsApp Image 2026-09-27 at 11.53.15.jpeg" alt="Bíblia Sagrada e Hinário com Teclado" 
+                   class="relative z-10 w-full h-full object-contain rounded-xl">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Bíblia e Hinário Preto com Glitter -->
+      <div class="carousel-slide absolute inset-0 opacity-0 invisible z-0 flex items-center" data-slide="2">
+        <img src="WhatsApp Image 2026-09-27 at 11.53.16 (1).jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60"></div>
+
+        <div class="relative z-20 max-w-7xl mx-auto w-full px-6 sm:px-14 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-xs sm:text-sm uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-4">
+              ★ Clássico & Sofisticado
+            </span>
+            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-4 text-brand-deepRose">
+              Bíblia e Hinário em Glitter com Detalhes Dourados
+            </h2>
+            <p class="text-base sm:text-lg text-brand-taupe leading-relaxed mb-6">
+              Contraste marcante entre o revestimento em glitter brilhante e as ferragens douradas. Conta com cantoneiras trabalhadas para proteção das bordas, placas espelhadas com nome personalizado em caligrafia elegante, marcador com tassel e caixa decorada.
+            </p>
+            <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-7 text-xs sm:text-sm font-medium text-brand-mocha">
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Acabamento Glitter Intenso</span>
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Cantoneiras e Placas Douradas</span>
+              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3.5 py-1.5 rounded-lg">✔ Marcador Tassel de Seda</span>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20e%20Hin%C3%A1rio%20Preto%20com%20Glitter." 
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3.5 pr-8 py-3 rounded-full shadow-md transition">
+              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+              </span>
+              <span>Quero Encomendar Este Modelo</span>
+            </a>
+          </div>
+
+          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+            <div class="relative w-[300px] h-[340px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center">
+              <img src="WhatsApp Image 2026-09-27 at 11.53.16 (1).jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+              <img src="WhatsApp Image 2026-09-27 at 11.53.16 (1).jpeg" alt="Bíblia e Hinário Preto com Glitter" 
+                   class="relative z-10 w-full h-full object-contain rounded-xl">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Setas Laterais do Carrossel -->
+      <button onclick="changeSlide(-1)" aria-label="Slide Anterior"
+              class="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition text-lg">
+        &#10094;
+      </button>
+      <button onclick="changeSlide(1)" aria-label="Próximo Slide"
+              class="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition text-lg">
+        &#10095;
+      </button>
+
+      <!-- Indicadores Inferiores -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-3 bg-brand-sand/90 border border-brand-roseGold/30 px-4 py-2 rounded-full">
+        <button onclick="goToSlide(0)" class="carousel-dot w-8 h-2.5 rounded-full bg-brand-roseGold transition-all duration-500"></button>
+        <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+        <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAIXA APRESENTAÇÃO -->
+  <section class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
+    <div class="inline-flex items-center gap-2 bg-brand-blush/80 text-brand-deepRose border border-brand-roseGold/25 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium uppercase tracking-wider mb-6">
+      📍 Atendimento em Hortolândia - SP e Região • Trabalho 100% Artesanal
+    </div>
+
+    <!-- Frase com a mesma fonte de "Personalizando" do topo -->
+    <h1 class="font-script text-4xl sm:text-6xl lg:text-[62px] font-normal text-brand-deepRose leading-tight mb-6 max-w-4xl mx-auto">
+      Peças únicas feitas à mão para eternizar momentos de fé e carinho.
+    </h1>
+
+    <p class="text-base sm:text-lg text-brand-taupe leading-relaxed max-w-3xl mx-auto mb-9">
+      Na <strong>Personalizando Por Amor</strong>, cuidamos de cada detalhe para transformar <strong>Bíblias, Hinários, Agendas e Cartões</strong> em recordações inesquecíveis. Você escolhe as cores, o revestimento, o nome gravado na placa e a mensagem do cartão.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20encomenda%20personalizada." 
+         target="_blank" rel="noopener noreferrer"
+         class="w-full sm:w-auto bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl text-xs sm:text-sm font-medium uppercase tracking-widest pl-3.5 pr-8 py-3.5 rounded-full transition shadow-md flex items-center justify-center gap-3">
+        <span class="w-9 h-9 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+          <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+        </span>
+        <span>Criar Meu Personalizado</span>
+      </a>
+
+      <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer"
+         class="group w-full sm:w-auto bg-gradient-to-r from-brand-pearl via-brand-ivory to-brand-blush/60 hover:from-brand-blush/50 hover:to-brand-pearl border border-brand-roseGold/45 hover:border-brand-roseGold pl-3.5 pr-7 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center gap-3.5">
+        <span class="w-9 h-9 rounded-xl bg-instagram-original text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+          <svg class="w-5 h-5 fill-current"><use href="#icone-instagram"></use></svg>
+        </span>
+        <span class="text-left leading-tight">
+          <span class="block text-[10px] uppercase tracking-[0.2em] text-brand-roseGold font-semibold">Inspire-se no Instagram</span>
+          <span class="block font-serif italic text-base sm:text-lg text-brand-mocha font-medium">@personalizando_por_amor</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE PRODUTOS (CARDS LIMPOS COM OS DESENHOS APENAS ATRÁS DA PÁGINA) -->
+  <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Nosso Catálogo</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-brand-mocha mb-3">O Que Personalizamos Para Você</h2>
+        <p class="text-sm sm:text-base text-brand-taupe">Acabamento impecável, materiais selecionados e personalização completa para presentear ou usar no dia a dia.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Mais Pedido</span>
+            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Bíblias & Hinários</h3>
+            <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
+              Capas em manta de strass, pérolas ou glitter fino, placas metálicas espelhadas gravadas com seu nome, fechos de luxo, cantoneiras douradas, marcadores com tassel e apliques musicais.
+            </p>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20or%C3%A7ar%20uma%20B%C3%ADblia%20ou%20Hin%C3%A1rio%20personalizado." 
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
+            <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
+            <span>Pedir com Carinho &rarr;</span>
+          </a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Organização</span>
+            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Agendas & Cadernos</h3>
+            <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
+              Agendas anuais, planners e cadernos personalizados com seu nome, inicial ou profissão. Capas duras resistentes e acabamento delicado para acompanhar sua rotina.
+            </p>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20or%C3%A7ar%20uma%20Agenda%20personalizada." 
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
+            <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
+            <span>Escolher Minha Capa &rarr;</span>
+          </a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between">
+          <div>
+            <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Kits Presente</span>
+            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Cartões & Caixas</h3>
+            <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
+              Caixas rígidas decoradas com o nome do presenteado e cartões florais com mensagens de fé e gratidão impressas sob medida para emocionar quem você ama.
+            </p>
+          </div>
+          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20Cart%C3%B5es%20e%20Kits%20Presente." 
+             target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
+            <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
+            <span>Montar Meu Kit &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center">
+    <h2 class="font-script text-4xl sm:text-6xl font-normal text-brand-deepRose mb-12">
+      Como Fazer Sua Encomenda
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm">
+        <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">01</span>
+        <h3 class="font-semibold text-lg text-brand-mocha mb-2">Converse Conosco</h3>
+        <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Escolha o modelo que tocou seu coração e clique no botão do WhatsApp para um atendimento acolhedor e personalizado.</p>
+      </div>
+      <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm">
+        <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">02</span>
+        <h3 class="font-semibold text-lg text-brand-mocha mb-2">Defina os Detalhes</h3>
+        <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Escolha a cor do glitter ou strass, o modelo das cantoneiras, o nome para gravação na placa e o texto do cartão.</p>
+      </div>
+      <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm">
+        <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">03</span>
+        <h3 class="font-semibold text-lg text-brand-mocha mb-2">Feito com Carinho</h3>
+        <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Confeccionamos sua peça artesanalmente em Hortolândia - SP com todo cuidado e combinamos a entrega.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAMADA FINAL -->
+  <section class="relative z-10 bg-brand-blush/30 py-16 px-4 sm:px-6 text-center border-t border-brand-roseGold/25">
+    <div class="max-w-3xl mx-auto">
+      <div class="w-40 h-40 sm:w-44 sm:h-44 mx-auto mb-3 flex items-center justify-center">
+        <img src="Logo_2.jpg" onerror="this.onerror=null;this.src='Logo.jpg';" 
+             alt="Logo Personalizando Por Amor" 
+             class="w-full h-full logo-perfeito">
+      </div>
+
+      <div class="whitespace-nowrap leading-none mb-2 flex items-baseline justify-center gap-2.5">
+        <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
+        <span class="font-serif text-lg sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
+      </div>
+
+      <p class="font-serif italic text-xl sm:text-2xl text-brand-roseGold font-medium mb-6">
+        ♥ Feito com Carinho ♥
+      </p>
+
+      <p class="text-base sm:text-lg text-brand-taupe mb-8">
+        Será uma alegria preparar uma peça especial para você ou para presentear quem você ama!
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento." 
+           target="_blank" rel="noopener noreferrer"
+           class="w-full sm:w-auto bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl text-xs sm:text-sm font-medium uppercase tracking-widest pl-3.5 pr-8 py-3.5 rounded-full shadow-md transition flex items-center justify-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+            <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          </span>
+          <span>Conversar pelo WhatsApp</span>
+        </a>
+
+        <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer"
+           class="group w-full sm:w-auto bg-gradient-to-r from-brand-pearl via-brand-ivory to-brand-blush/60 hover:from-brand-blush/50 hover:to-brand-pearl border border-brand-roseGold/45 hover:border-brand-roseGold pl-3.5 pr-7 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center gap-3.5">
+          <span class="w-9 h-9 rounded-xl bg-instagram-original text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+            <svg class="w-5 h-5 fill-current"><use href="#icone-instagram"></use></svg>
+          </span>
+          <span class="text-left leading-tight">
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-brand-roseGold font-semibold">Siga nosso perfil</span>
+            <span class="block font-serif italic text-base sm:text-lg text-brand-mocha font-medium">@personalizando_por_amor</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTÃO FLUTUANTE DO WHATSAPP COM VERDE OFICIAL -->
+  <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Vim%20pelo%20site%20Personalizando%20Por%20Amor%20e%20gostaria%20de%20um%20or%C3%A7amento."
+     target="_blank" rel="noopener noreferrer"
+     class="fixed bottom-5 right-5 z-50 bg-brand-pearl hover:bg-brand-ivory text-brand-mocha pl-3 pr-5 py-2.5 rounded-full shadow-xl border border-brand-roseGold/40 flex items-center gap-2.5 font-medium text-xs sm:text-sm transition transform hover:scale-105">
+    <span class="w-8 h-8 rounded-full bg-brand-whatsapp text-white flex items-center justify-center shadow-sm flex-shrink-0">
+      <svg class="w-5 h-5 fill-current"><use href="#icone-whatsapp"></use></svg>
+    </span>
+    <span>Fale com a gente!</span>
+  </a>
+
+  <!-- RODAPÉ EM TOM SUAVE ESCURO -->
+  <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 py-10 px-4 sm:px-6 text-center text-sm">
+    <div class="whitespace-nowrap mb-1 flex items-baseline justify-center gap-2">
+      <span class="font-script text-3xl sm:text-4xl text-brand-blush">Personalizando</span>
+      <span class="font-serif text-base sm:text-xl font-medium uppercase tracking-[0.18em] text-brand-pearl">POR AMOR</span>
+    </div>
+    <p class="font-serif italic text-lg sm:text-xl text-brand-blush mb-3">♥ Feito com Carinho ♥</p>
+    <p class="mb-3 text-brand-sand/90 text-xs sm:text-sm flex flex-wrap items-center justify-center gap-3">
+      <span>Hortolândia - SP</span>
+      <span>•</span>
+      <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="hover:text-brand-blush underline inline-flex items-center gap-1.5">
+        <svg class="w-4 h-4 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+        <span>Atendimento via WhatsApp</span>
+      </a>
+      <span>•</span>
+      <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="hover:text-brand-blush underline inline-flex items-center gap-1.5">
+        <span class="w-4 h-4 rounded bg-instagram-original text-white inline-flex items-center justify-center">
+          <svg class="w-3 h-3 fill-current"><use href="#icone-instagram"></use></svg>
+        </span>
+        <span>@personalizando_por_amor</span>
+      </a>
+    </p>
+    <p class="text-xs text-brand-sand/50">© 2026 Personalizando Por Amor. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- SCRIPT DO CARROSSEL COM TRANSIÇÃO SUAVE -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        const isActive = i === index;
+        slide.classList.toggle('active-slide', isActive);
+        slide.classList.toggle('opacity-100', isActive);
+        slide.classList.toggle('visible', isActive);
+        slide.classList.toggle('z-10', isActive);
+        slide.classList.toggle('opacity-0', !isActive);
+        slide.classList.toggle('invisible', !isActive);
+        slide.classList.toggle('z-0', !isActive);
+      });
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('w-8', 'bg-brand-roseGold');
+          dot.classList.remove('w-2.5', 'bg-brand-roseGold/40');
+        } else {
+          dot.classList.add('w-2.5', 'bg-brand-roseGold/40');
+          dot.classList.remove('w-8', 'bg-brand-roseGold');
+        }
+      });
+      currentSlide = index;
+    }
+
+    function changeSlide(direction) {
+      let nextIndex = (currentSlide + direction + slides.length) % slides.length;
+      showSlide(nextIndex);
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+    }
+
+    setInterval(() => {
+      changeSlide(1);
+    }, 6000);
+  </script>
+
+</body>
+</html>
