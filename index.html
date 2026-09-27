@@ -38,8 +38,14 @@
   <style>
     html { scroll-behavior: smooth; }
 
-    /* Transição suave e delicada para o Carrossel */
+    /* Estrutura em Grid para o Carrossel nunca cortar botões nem sobrepor elementos no celular */
+    .carousel-grid {
+      display: grid;
+      grid-template-columns: 100%;
+    }
     .carousel-slide {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
       transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), visibility 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .carousel-slide .slide-text {
@@ -69,6 +75,22 @@
       filter: contrast(1.08);
       -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 72%);
       mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 72%);
+    }
+
+    /* Compactação suave do topo fixo quando o usuário rola a página */
+    #topo-fixo {
+      transition: padding 0.35s ease, box-shadow 0.35s ease;
+    }
+    #logo-container {
+      transition: width 0.35s ease, height 0.35s ease;
+    }
+    body.rolando #topo-fixo {
+      padding-top: 0.35rem;
+      padding-bottom: 0.35rem;
+    }
+    body.rolando #logo-container {
+      width: 4.5rem;
+      height: 4.5rem;
     }
 
     /* Degradê Oficial Original do Instagram */
@@ -184,12 +206,12 @@
     </svg>
   </div>
 
-  <!-- PARTE 1 DO TOPO (RECOLHE AUTOMATICAMENTE AO ROLAR A PÁGINA PARA BAIXO) -->
-  <header class="relative z-20 bg-brand-ivory/85 backdrop-blur-sm pt-4 pb-2 px-4 sm:px-8 text-center">
+  <!-- PARTE 1 DO TOPO: FICA SEMPRE À MOSTRA (FIXA) CONFORME IMAGEM ENVIADA -->
+  <header id="topo-fixo" class="sticky top-0 z-50 bg-brand-ivory/95 backdrop-blur-md border-b border-brand-roseGold/25 shadow-sm pt-3 pb-2.5 px-4 sm:px-8 text-center">
     <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
       <a href="#" class="inline-flex flex-col items-center group">
         <!-- Logo -->
-        <div class="w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center mb-1">
+        <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5">
           <img src="Logo_2.jpg" onerror="this.onerror=null;this.src='Logo.jpg';" 
                alt="Logo Personalizando Por Amor" 
                class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-300">
@@ -200,31 +222,31 @@
           <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">
             Personalizando
           </span>
-          <span class="font-serif text-lg sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">
+          <span class="font-serif text-base sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">
             POR AMOR
           </span>
         </div>
 
         <!-- Subtítulo ♥ Feito com Carinho ♥ -->
-        <div class="font-serif italic text-base sm:text-2xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
-          <span class="text-brand-deepRose not-italic text-sm sm:text-xl">♥</span>
+        <div class="font-serif italic text-sm sm:text-xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
+          <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
           <span>Feito com Carinho</span>
-          <span class="text-brand-deepRose not-italic text-sm sm:text-xl">♥</span>
+          <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
         </div>
       </a>
     </div>
   </header>
 
-  <!-- PARTE 2 DO TOPO (MANTÉM-SE FIXA NO TOPO AO ROLAR A PÁGINA) -->
-  <div class="sticky top-0 z-50 bg-brand-ivory/95 backdrop-blur-md border-b border-brand-roseGold/25 shadow-sm py-2 px-3 sm:px-8 transition-all">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-4">
+  <!-- PARTE 2 DO TOPO: RECOLHE AUTOMATICAMENTE AO ROLAR A PÁGINA PARA BAIXO -->
+  <div class="relative z-20 bg-brand-ivory/80 border-b border-brand-roseGold/20 py-2.5 px-3 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
       
       <!-- Linha de Especialidades -->
       <span class="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-brand-taupe/90 font-medium text-center">
         Bíblias • Hinários • Agendas • Cartões
       </span>
 
-      <!-- Menu de Navegação Compacto numa Única Linha -->
+      <!-- Links de Navegação -->
       <nav class="flex items-center justify-center gap-4 sm:gap-7 text-[11px] sm:text-xs uppercase tracking-wider sm:tracking-widest font-medium text-brand-mocha whitespace-nowrap">
         <a href="#destaques" class="hover:text-brand-roseGold transition-colors">Trabalhos</a>
         <a href="#produtos" class="hover:text-brand-roseGold transition-colors">Catálogo</a>
@@ -240,16 +262,16 @@
     </div>
   </div>
 
-  <!-- BANNER CARROSSEL COM AS 3 IMAGENS DO MESMO TAMANHO E ENQUADRAMENTO PERFEITO -->
-  <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30">
-    <div class="relative w-full min-h-[720px] sm:min-h-[620px] lg:min-h-[610px]">
+  <!-- BANNER CARROSSEL SEM SOBREPOSIÇÃO NO BOTÃO DO WHATSAPP E COM TRANSIÇÃO DE 10 SEGUNDOS -->
+  <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30 scroll-mt-36">
+    <div class="relative w-full carousel-grid">
 
       <!-- SLIDE 1: Bíblia em Strass com Fecho -->
-      <div class="carousel-slide active-slide absolute inset-0 opacity-100 visible z-10 flex items-center" data-slide="0">
+      <div class="carousel-slide active-slide relative opacity-100 visible z-10 flex items-center" data-slide="0">
         <img src="WhatsApp Image 2026-09-27 at 11.53.16.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15">
         <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-6 pb-14 sm:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
             <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
               ★ Destaque • Acabamento Luxo em Strass
@@ -267,7 +289,7 @@
             </div>
             <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20modelo%20de%20B%C3%ADblia%20em%20Strass%20com%20Fecho." 
                target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-2.5 sm:py-3 rounded-full shadow-md transition">
+               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
               <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
                 <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
               </span>
@@ -286,11 +308,11 @@
       </div>
 
       <!-- SLIDE 2: Kit Musicista (Bíblia e Hinário com Teclado) -->
-      <div class="carousel-slide absolute inset-0 opacity-0 invisible z-0 flex items-center" data-slide="1">
+      <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="1">
         <img src="WhatsApp Image 2026-09-27 at 11.53.15.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15">
         <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-6 pb-14 sm:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
             <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
               ★ Kit Especial Musicista & Organista
@@ -308,7 +330,7 @@
             </div>
             <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20Kit%20B%C3%ADblia%20e%20Hin%C3%A1rio%20com%20Teclado%20e%20Caixa." 
                target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-2.5 sm:py-3 rounded-full shadow-md transition">
+               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
               <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
                 <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
               </span>
@@ -327,11 +349,11 @@
       </div>
 
       <!-- SLIDE 3: Bíblia e Hinário Preto com Glitter -->
-      <div class="carousel-slide absolute inset-0 opacity-0 invisible z-0 flex items-center" data-slide="2">
+      <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="2">
         <img src="WhatsApp Image 2026-09-27 at 11.53.16 (1).jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15">
         <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-6 pb-14 sm:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
             <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
               ★ Clássico & Sofisticado
@@ -349,7 +371,7 @@
             </div>
             <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20e%20Hin%C3%A1rio%20Preto%20com%20Glitter." 
                target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-2.5 sm:py-3 rounded-full shadow-md transition">
+               class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
               <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
                 <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
               </span>
@@ -369,19 +391,19 @@
 
       <!-- Setas Laterais do Carrossel -->
       <button onclick="changeSlide(-1)" aria-label="Slide Anterior"
-              class="absolute left-2 sm:left-5 top-[150px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition text-base sm:text-lg">
+              class="absolute left-2 sm:left-5 top-[160px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition text-base sm:text-lg">
         &#10094;
       </button>
       <button onclick="changeSlide(1)" aria-label="Próximo Slide"
-              class="absolute right-2 sm:right-5 top-[150px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition text-base sm:text-lg">
+              class="absolute right-2 sm:right-5 top-[160px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-md transition text-base sm:text-lg">
         &#10095;
       </button>
 
-      <!-- Indicadores Inferiores -->
-      <div class="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-3 bg-brand-sand/90 border border-brand-roseGold/30 px-4 py-2 rounded-full">
-        <button onclick="goToSlide(0)" class="carousel-dot w-8 h-2.5 rounded-full bg-brand-roseGold transition-all duration-500"></button>
-        <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
-        <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+      <!-- Indicadores Inferiores posicionados abaixo do botão (sem sobrepor) -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-3 bg-brand-sand/95 border border-brand-roseGold/30 px-4 py-2 rounded-full shadow-sm">
+        <button onclick="goToSlide(0)" aria-label="Slide 1" class="carousel-dot w-8 h-2.5 rounded-full bg-brand-roseGold transition-all duration-500"></button>
+        <button onclick="goToSlide(1)" aria-label="Slide 2" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+        <button onclick="goToSlide(2)" aria-label="Slide 3" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
       </div>
 
     </div>
@@ -425,7 +447,7 @@
   </section>
 
   <!-- CATÁLOGO DE PRODUTOS -->
-  <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20 scroll-mt-14">
+  <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20 scroll-mt-36">
     <div class="max-w-6xl mx-auto px-4 sm:px-8">
       <div class="text-center max-w-2xl mx-auto mb-14">
         <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Nosso Catálogo</span>
@@ -489,7 +511,7 @@
   </section>
 
   <!-- COMO FUNCIONA -->
-  <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center scroll-mt-14">
+  <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center scroll-mt-36">
     <h2 class="font-script text-4xl sm:text-6xl font-normal text-brand-deepRose mb-12">
       Como Fazer Sua Encomenda
     </h2>
@@ -592,11 +614,12 @@
     <p class="text-xs text-brand-sand/50">© 2026 Personalizando Por Amor. Todos os direitos reservados.</p>
   </footer>
 
-  <!-- SCRIPT DO CARROSSEL COM TRANSIÇÃO SUAVE -->
+  <!-- SCRIPT DO CARROSSEL (10 SEGUNDOS) E COMPACTAÇÃO SUAVE DO TOPO -->
   <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
     const dots = document.querySelectorAll('.carousel-dot');
+    let slideTimer;
 
     function showSlide(index) {
       slides.forEach((slide, i) => {
@@ -621,18 +644,36 @@
       currentSlide = index;
     }
 
+    function resetTimer() {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(() => {
+        let nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+      }, 10000); // 10 segundos
+    }
+
     function changeSlide(direction) {
       let nextIndex = (currentSlide + direction + slides.length) % slides.length;
       showSlide(nextIndex);
+      resetTimer();
     }
 
     function goToSlide(index) {
       showSlide(index);
+      resetTimer();
     }
 
-    setInterval(() => {
-      changeSlide(1);
-    }, 6000);
+    // Inicia o temporizador de 10 segundos
+    resetTimer();
+
+    // Deixa o topo fixo levemente mais compacto ao rolar a página para não ocupar muito espaço no celular
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        document.body.classList.add('rolando');
+      } else {
+        document.body.classList.remove('rolando');
+      }
+    });
   </script>
 
 </body>
