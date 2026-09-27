@@ -184,46 +184,48 @@
     </svg>
   </div>
 
-  <!-- CABEÇALHO COMPACTO NO TELEMÓVEL E ELEGANTE NO COMPUTADOR (SEM O BOTÃO FALE CONOSCO) -->
-  <header class="bg-brand-ivory/90 backdrop-blur-md border-b border-brand-roseGold/25 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-3 sm:px-8 py-2 sm:py-3 flex flex-col lg:flex-row items-center justify-between gap-2 sm:gap-4">
-      
-      <!-- Logo + Nome lado a lado também no telemóvel para poupar espaço vertical -->
-      <a href="#" class="flex flex-row items-center justify-center sm:justify-start text-left gap-2.5 sm:gap-5 group">
-        
-        <div class="w-16 h-16 sm:w-32 sm:h-32 flex items-center justify-center flex-shrink-0">
+  <!-- PARTE 1 DO TOPO (RECOLHE AUTOMATICAMENTE AO ROLAR A PÁGINA PARA BAIXO) -->
+  <header class="relative z-20 bg-brand-ivory/85 backdrop-blur-sm pt-4 pb-2 px-4 sm:px-8 text-center">
+    <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
+      <a href="#" class="inline-flex flex-col items-center group">
+        <!-- Logo -->
+        <div class="w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center mb-1">
           <img src="Logo_2.jpg" onerror="this.onerror=null;this.src='Logo.jpg';" 
                alt="Logo Personalizando Por Amor" 
                class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-300">
         </div>
 
-        <div class="flex flex-col justify-center">
-          <!-- Escrito na mesma linha com fonte leve e delicada -->
-          <div class="whitespace-nowrap flex items-baseline gap-1.5 sm:gap-2.5 leading-none mb-0.5 sm:mb-1.5">
-            <span class="font-script text-2xl sm:text-4xl lg:text-[44px] text-brand-roseGold font-normal">
-              Personalizando
-            </span>
-            <span class="font-serif text-sm sm:text-2xl lg:text-[26px] font-medium uppercase tracking-[0.14em] sm:tracking-[0.18em] text-brand-deepRose">
-              POR AMOR
-            </span>
-          </div>
-
-          <!-- Subtítulo Feito com Carinho e Corações -->
-          <div class="font-serif italic text-xs sm:text-2xl text-brand-roseGold font-medium tracking-wide sm:mb-1 flex items-center gap-1 sm:gap-2">
-            <span class="text-brand-deepRose not-italic text-[10px] sm:text-xl">♥</span>
-            <span>Feito com Carinho</span>
-            <span class="text-brand-deepRose not-italic text-[10px] sm:text-xl">♥</span>
-          </div>
-
-          <!-- Linha de produtos visível a partir de ecrãs médios para não ocupar altura extra no smartphone -->
-          <span class="hidden sm:block text-xs uppercase tracking-[0.15em] text-brand-taupe/90 font-normal">
-            Bíblias • Hinários • Agendas • Cartões
+        <!-- Título Personalizando POR AMOR na mesma linha -->
+        <div class="whitespace-nowrap flex items-baseline justify-center gap-2 sm:gap-2.5 leading-none mb-1">
+          <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">
+            Personalizando
+          </span>
+          <span class="font-serif text-lg sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">
+            POR AMOR
           </span>
         </div>
-      </a>
 
-      <!-- Menu de Navegação numa linha única sem quebrar palavras no smartphone -->
-      <nav class="w-full lg:w-auto flex items-center justify-center gap-4 sm:gap-7 pt-1.5 sm:pt-0 border-t border-brand-roseGold/15 lg:border-none text-[11px] sm:text-xs uppercase tracking-wider sm:tracking-widest font-medium text-brand-mocha whitespace-nowrap">
+        <!-- Subtítulo ♥ Feito com Carinho ♥ -->
+        <div class="font-serif italic text-base sm:text-2xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
+          <span class="text-brand-deepRose not-italic text-sm sm:text-xl">♥</span>
+          <span>Feito com Carinho</span>
+          <span class="text-brand-deepRose not-italic text-sm sm:text-xl">♥</span>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- PARTE 2 DO TOPO (MANTÉM-SE FIXA NO TOPO AO ROLAR A PÁGINA) -->
+  <div class="sticky top-0 z-50 bg-brand-ivory/95 backdrop-blur-md border-b border-brand-roseGold/25 shadow-sm py-2 px-3 sm:px-8 transition-all">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1.5 sm:gap-4">
+      
+      <!-- Linha de Especialidades -->
+      <span class="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-brand-taupe/90 font-medium text-center">
+        Bíblias • Hinários • Agendas • Cartões
+      </span>
+
+      <!-- Menu de Navegação Compacto numa Única Linha -->
+      <nav class="flex items-center justify-center gap-4 sm:gap-7 text-[11px] sm:text-xs uppercase tracking-wider sm:tracking-widest font-medium text-brand-mocha whitespace-nowrap">
         <a href="#destaques" class="hover:text-brand-roseGold transition-colors">Trabalhos</a>
         <a href="#produtos" class="hover:text-brand-roseGold transition-colors">Catálogo</a>
         <a href="#como-funciona" class="hover:text-brand-roseGold transition-colors">Como Pedir</a>
@@ -236,9 +238,9 @@
       </nav>
 
     </div>
-  </header>
+  </div>
 
-  <!-- BANNER CARROSSEL COM AS 3 IMAGENS DO MESMO TAMANHO E ENQUADRAMENTO PERFEITO NO TELEMÓVEL -->
+  <!-- BANNER CARROSSEL COM AS 3 IMAGENS DO MESMO TAMANHO E ENQUADRAMENTO PERFEITO -->
   <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30">
     <div class="relative w-full min-h-[720px] sm:min-h-[620px] lg:min-h-[610px]">
 
@@ -423,7 +425,7 @@
   </section>
 
   <!-- CATÁLOGO DE PRODUTOS -->
-  <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20">
+  <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20 scroll-mt-14">
     <div class="max-w-6xl mx-auto px-4 sm:px-8">
       <div class="text-center max-w-2xl mx-auto mb-14">
         <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Nosso Catálogo</span>
@@ -487,7 +489,7 @@
   </section>
 
   <!-- COMO FUNCIONA -->
-  <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center">
+  <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center scroll-mt-14">
     <h2 class="font-script text-4xl sm:text-6xl font-normal text-brand-deepRose mb-12">
       Como Fazer Sua Encomenda
     </h2>
