@@ -50,7 +50,8 @@
     }
   </script>
   <style>
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    /* Ocultamos o overflow-x apenas onde é necessário e deixamos o html livre para o Sticky funcionar */
+    html { scroll-behavior: smooth; }
 
     /* Estrutura em Grid para o Carrossel nunca cortar botões nem sobrepor elementos no celular */
     .carousel-grid {
@@ -93,7 +94,7 @@
 
     /* Compactação suave do topo fixo quando o usuário rola a página */
     #topo-fixo {
-      transition: padding 0.35s ease;
+      transition: padding 0.35s ease, box-shadow 0.35s ease;
     }
     #logo-container {
       transition: width 0.35s ease, height 0.35s ease;
@@ -124,7 +125,7 @@
     }
   </style>
 </head>
-<body class="bg-brand-ivory text-brand-taupe font-sans antialiased text-base relative overflow-x-hidden w-full">
+<body class="bg-brand-ivory text-brand-taupe font-sans antialiased text-base relative w-full">
 
   <!-- Símbolos SVG Reutilizáveis: Ícones e Desenhos à Mão -->
   <svg class="hidden" aria-hidden="true">
@@ -216,7 +217,7 @@
     </svg>
   </div>
 
-  <!-- HEADER COMPLETO FIXED: Agrupa o Logo e o Menu para rolarem juntos -->
+  <!-- HEADER COMPLETO FIXED: Agrupa o Logo e o Menu para rolarem juntos e FICAREM NO TOPO -->
   <header class="sticky top-0 z-50 w-full bg-brand-ivory/95 backdrop-blur-md shadow-sm border-b border-brand-roseGold/25 flex flex-col">
     
     <!-- PARTE 1: LOGO E TÍTULO (Encolhe ao rolar) -->
@@ -241,8 +242,8 @@
       </div>
     </div>
 
-    <!-- PARTE 2: MENU DE NAVEGAÇÃO (Fica sempre visível) -->
-    <div class="border-t border-brand-roseGold/10 py-2.5 px-3 sm:px-8">
+    <!-- PARTE 2: MENU DE NAVEGAÇÃO -->
+    <div class="border-t border-brand-roseGold/10 py-3 px-3 sm:px-8">
       <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
         <span class="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-brand-taupe/90 font-medium text-center">
           Bíblias • Hinários • Agendas • Cartões
@@ -264,379 +265,408 @@
     </div>
   </header>
 
-  <!-- BANNER CARROSSEL COM SWIPE E HOVER PAUSE -->
-  <!-- Aumentado o scroll-mt para 44 para não esconder o título sob o menu duplo -->
-  <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30 scroll-mt-44">
-    <div class="relative w-full carousel-grid" id="carousel-container">
+  <!-- ISOLAMENTO DE ROLAGEM: Essa tag 'main' garante que o site não passe da largura da tela, deixando o Header livre para ficar no topo -->
+  <main class="w-full overflow-x-hidden">
+    
+    <!-- BANNER CARROSSEL -->
+    <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30 scroll-mt-44">
+      <div class="relative w-full carousel-grid" id="carousel-container">
 
-      <!-- SLIDE 1: 1.jpg -->
-      <div class="carousel-slide active-slide relative opacity-100 visible z-10 flex items-center" data-slide="0">
-        <img src="1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
+        <!-- SLIDE 1: 1.jpg -->
+        <div class="carousel-slide active-slide relative opacity-100 visible z-10 flex items-center" data-slide="0">
+          <img src="1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
-            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
-              ★ Kit Especial Musicista & Organista
-            </span>
-            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
-              Bíblia Sagrada e Hinário + Caixa Presente e Cartão
-            </h2>
-            <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
-              Personalização temática com capa em glitter perolado e aplique em relevo de teclado musical contornado em strass dourado. Inclui cantoneiras metálicas, placas gravadas, marcador com tassel e acompanha caixa personalizada e cartão com dedicatória especial.
-            </p>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Aplique Musical de Teclado</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Caixa Personalizada Inclusa</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Cartão com Mensagem</span>
-            </div>
-            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20Kit%20B%C3%ADblia%20e%20Hin%C3%A1rio%20com%20Teclado%20e%20Caixa." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
-              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
-                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+              <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
+                ★ Kit Especial Musicista & Organista
               </span>
-              <span>Quero Encomendar Este Kit</span>
-            </a>
-          </div>
+              <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
+                Bíblia Sagrada e Hinário + Caixa Presente e Cartão
+              </h2>
+              <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
+                Personalização temática com capa em glitter perolado e aplique em relevo de teclado musical contornado em strass dourado. Inclui cantoneiras metálicas, placas gravadas, marcador com tassel e acompanha caixa personalizada e cartão com dedicatória especial.
+              </p>
+              <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Aplique Musical de Teclado</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Caixa Personalizada Inclusa</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Cartão com Mensagem</span>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20Kit%20B%C3%ADblia%20e%20Hin%C3%A1rio%20com%20Teclado%20e%20Caixa." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
+                <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                  <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+                </span>
+                <span>Quero Encomendar Este Kit</span>
+              </a>
+            </div>
 
-          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
-            <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
-              <img src="1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
-              <img src="1.jpg" alt="Bíblia Sagrada e Hinário com Teclado" class="relative z-10 w-full h-full object-cover rounded-xl">
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+              <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
+                <img src="1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+                <img src="1.jpg" alt="Bíblia Sagrada e Hinário com Teclado" class="relative z-10 w-full h-full object-cover rounded-xl">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- SLIDE 2: 2.jpeg -->
-      <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="1">
-        <img src="2.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
+        <!-- SLIDE 2: 2.jpeg -->
+        <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="1">
+          <img src="2.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
-            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
-              ★ Clássico & Sofisticado
-            </span>
-            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
-              Bíblia e Hinário em Glitter com Detalhes Dourados
-            </h2>
-            <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
-              Contraste marcante entre o revestimento em glitter brilhante e as ferragens douradas. Conta com cantoneiras trabalhadas para proteção das bordas, placas espelhadas com nome personalizado em caligrafia elegante, marcador com tassel e caixa decorada.
-            </p>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Acabamento Glitter Intenso</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Cantoneiras e Placas Douradas</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Marcador Tassel de Seda</span>
-            </div>
-            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20e%20Hin%C3%A1rio%20Preto%20com%20Glitter." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
-              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
-                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+              <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
+                ★ Clássico & Sofisticado
               </span>
-              <span>Quero Encomendar Este Modelo</span>
-            </a>
-          </div>
-          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
-            <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
-              <img src="2.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
-              <img src="2.jpeg" alt="Bíblia e Hinário Preto com Glitter" class="relative z-10 w-full h-full object-cover rounded-xl">
+              <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
+                Bíblia e Hinário em Glitter com Detalhes Dourados
+              </h2>
+              <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
+                Contraste marcante entre o revestimento em glitter brilhante e as ferragens douradas. Conta com cantoneiras trabalhadas para proteção das bordas, placas espelhadas com nome personalizado em caligrafia elegante, marcador com tassel e caixa decorada.
+              </p>
+              <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Acabamento Glitter Intenso</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Cantoneiras e Placas Douradas</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Marcador Tassel de Seda</span>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20e%20Hin%C3%A1rio%20Preto%20com%20Glitter." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
+                <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                  <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+                </span>
+                <span>Quero Encomendar Este Modelo</span>
+              </a>
+            </div>
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+              <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
+                <img src="2.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+                <img src="2.jpeg" alt="Bíblia e Hinário Preto com Glitter" class="relative z-10 w-full h-full object-cover rounded-xl">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- SLIDE 3: 3.jpeg -->
-      <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="2">
-        <img src="3.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
+        <!-- SLIDE 3: 3.jpeg -->
+        <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="2">
+          <img src="3.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
-            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
-              ★ Destaque • Acabamento Luxo em Strass
-            </span>
-            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
-              Bíblia Sagrada Revestida em Strass com Fecho Metálico
-            </h2>
-            <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
-              Peça exclusiva confeccionada artesanalmente com manta de strass de alto brilho e faixas em tom rosê gold. Acompanha moldura superior trabalhada, placa dourada espelhada gravada com o nome, fecho metálico resistente e duplo marcador com pérolas, ponto de luz e tassel.
-            </p>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Placa com Nome Gravado</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Fecho Metálico</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Pingente Tassel & Pérolas</span>
-            </div>
-            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20modelo%20de%20B%C3%ADblia%20em%20Strass%20com%20Fecho." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
-              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
-                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+              <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
+                ★ Destaque • Acabamento Luxo em Strass
               </span>
-              <span>Quero Encomendar com Carinho</span>
-            </a>
-          </div>
-          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
-            <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
-              <img src="3.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
-              <img src="3.jpeg" alt="Bíblia Sagrada em Strass com Fecho" class="relative z-10 w-full h-full object-cover rounded-xl">
+              <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
+                Bíblia Sagrada Revestida em Strass com Fecho Metálico
+              </h2>
+              <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
+                Peça exclusiva confeccionada artesanalmente com manta de strass de alto brilho e faixas em tom rosê gold. Acompanha moldura superior trabalhada, placa dourada espelhada gravada com o nome, fecho metálico resistente e duplo marcador com pérolas, ponto de luz e tassel.
+              </p>
+              <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Placa com Nome Gravado</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Fecho Metálico</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Pingente Tassel & Pérolas</span>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20o%20modelo%20de%20B%C3%ADblia%20em%20Strass%20com%20Fecho." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
+                <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                  <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+                </span>
+                <span>Quero Encomendar com Carinho</span>
+              </a>
+            </div>
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+              <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
+                <img src="3.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+                <img src="3.jpeg" alt="Bíblia Sagrada em Strass com Fecho" class="relative z-10 w-full h-full object-cover rounded-xl">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- SLIDE 4: 4.jpeg -->
-      <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="3">
-        <img src="4.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
+        <!-- SLIDE 4: 4.jpeg -->
+        <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="3">
+          <img src="4.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
-            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
-              ★ Brilho & Sofisticação
-            </span>
-            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
-              Bíblia Sagrada com Acabamento Dourado Premium
-            </h2>
-            <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
-              Design elegante com textura dourada cintilante, cantoneiras robustas para proteção das bordas e uma belíssima placa espelhada gravada com o seu nome. O presente perfeito para um momento inesquecível de fé.
-            </p>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Textura Dourada</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Cantoneiras Metálicas</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Placa Personalizada</span>
-            </div>
-            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20Dourada." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
-              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
-                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+              <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
+                ★ Brilho & Sofisticação
               </span>
-              <span>Quero Encomendar Este Modelo</span>
-            </a>
-          </div>
-          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
-            <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
-              <img src="4.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
-              <img src="4.jpeg" alt="Bíblia Sagrada Dourada" class="relative z-10 w-full h-full object-cover object-[center_30%] rounded-xl">
+              <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
+                Bíblia Sagrada com Acabamento Dourado Premium
+              </h2>
+              <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
+                Design elegante com textura dourada cintilante, cantoneiras robustas para proteção das bordas e uma belíssima placa espelhada gravada com o seu nome. O presente perfeito para um momento inesquecível de fé.
+              </p>
+              <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Textura Dourada</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Cantoneiras Metálicas</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Placa Personalizada</span>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20Dourada." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
+                <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                  <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+                </span>
+                <span>Quero Encomendar Este Modelo</span>
+              </a>
+            </div>
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+              <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
+                <img src="4.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+                <img src="4.jpeg" alt="Bíblia Sagrada Dourada" class="relative z-10 w-full h-full object-cover object-[center_30%] rounded-xl">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- SLIDE 5: 5.jpeg -->
-      <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="4">
-        <img src="5.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
+        <!-- SLIDE 5: 5.jpeg -->
+        <div class="carousel-slide relative opacity-0 invisible z-0 flex items-center" data-slide="4">
+          <img src="5.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-15 pointer-events-none">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-sand/80 via-brand-ivory/75 to-brand-blush/60 pointer-events-none"></div>
 
-        <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
-            <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
-              ★ Estilo & Durabilidade
-            </span>
-            <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
-              Bíblia com Revestimento em Couro Sintético
-            </h2>
-            <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
-              Para quem busca um visual mais sóbrio e altamente resistente. Revestimento texturizado em tom marrom escuro que garante grande durabilidade para o uso diário, sem perder a elegância da placa metálica personalizada.
-            </p>
-            <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Couro Sintético</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Visual Sóbrio</span>
-              <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Alta Durabilidade</span>
-            </div>
-            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20Marrom." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
-              <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
-                <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          <div class="relative z-20 max-w-7xl mx-auto w-full px-5 sm:px-14 pt-8 pb-20 sm:pt-12 sm:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+            <div class="lg:col-span-7 text-center lg:text-left order-2 lg:order-1 slide-text">
+              <span class="inline-block bg-brand-blush text-brand-deepRose border border-brand-roseGold/30 text-[11px] sm:text-sm uppercase tracking-widest font-semibold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full mb-3 sm:mb-4">
+                ★ Estilo & Durabilidade
               </span>
-              <span>Quero Encomendar Este Modelo</span>
-            </a>
-          </div>
-          <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
-            <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
-              <img src="5.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
-              <img src="5.jpeg" alt="Bíblia com Revestimento Marrom" class="relative z-10 w-full h-full object-cover rounded-xl">
+              <h2 class="font-script text-4xl sm:text-5xl lg:text-[56px] font-normal leading-tight mb-3 sm:mb-4 text-brand-deepRose">
+                Bíblia com Revestimento em Couro Sintético
+              </h2>
+              <p class="text-sm sm:text-lg text-brand-taupe leading-relaxed mb-5 sm:mb-6">
+                Para quem busca um visual mais sóbrio e altamente resistente. Revestimento texturizado em tom marrom escuro que garante grande durabilidade para o uso diário, sem perder a elegância da placa metálica personalizada.
+              </p>
+              <div class="flex flex-wrap justify-center lg:justify-start gap-2 mb-6 text-xs sm:text-sm font-medium text-brand-mocha">
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Couro Sintético</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Visual Sóbrio</span>
+                <span class="bg-brand-pearl/90 border border-brand-roseGold/30 px-3 py-1 rounded-lg">✔ Alta Durabilidade</span>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20or%C3%A7ar%20a%20B%C3%ADblia%20Marrom." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl font-medium text-xs sm:text-sm uppercase tracking-widest pl-3 pr-7 py-3 rounded-full shadow-md transition">
+                <span class="w-8 h-8 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+                  <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+                </span>
+                <span>Quero Encomendar Este Modelo</span>
+              </a>
+            </div>
+            <div class="lg:col-span-5 flex justify-center order-1 lg:order-2 slide-image-box">
+              <div class="relative w-[260px] h-[280px] sm:w-[380px] sm:h-[410px] lg:w-[420px] lg:h-[440px] rounded-2xl shadow-xl border-2 border-brand-roseGold/40 bg-brand-pearl p-2 overflow-hidden flex items-center justify-center pointer-events-none">
+                <img src="5.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover blur-md scale-110 opacity-35">
+                <img src="5.jpeg" alt="Bíblia com Revestimento Marrom" class="relative z-10 w-full h-full object-cover rounded-xl">
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Setas Laterais (Visíveis no desktop) -->
-      <button onclick="changeSlide(-1)" aria-label="Slide Anterior" class="hidden sm:flex absolute left-2 sm:left-5 top-[160px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full items-center justify-center shadow-md transition text-base sm:text-lg">
-        &#10094;
-      </button>
-      <button onclick="changeSlide(1)" aria-label="Próximo Slide" class="hidden sm:flex absolute right-2 sm:right-5 top-[160px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full items-center justify-center shadow-md transition text-base sm:text-lg">
-        &#10095;
-      </button>
+        <!-- Setas Laterais (Visíveis no desktop) -->
+        <button onclick="changeSlide(-1)" aria-label="Slide Anterior" class="hidden sm:flex absolute left-2 sm:left-5 top-[160px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full items-center justify-center shadow-md transition text-base sm:text-lg">
+          &#10094;
+        </button>
+        <button onclick="changeSlide(1)" aria-label="Próximo Slide" class="hidden sm:flex absolute right-2 sm:right-5 top-[160px] sm:top-1/2 -translate-y-1/2 z-30 bg-brand-pearl/90 hover:bg-brand-roseGold hover:text-brand-pearl text-brand-mocha border border-brand-roseGold/30 w-10 h-10 sm:w-12 sm:h-12 rounded-full items-center justify-center shadow-md transition text-base sm:text-lg">
+          &#10095;
+        </button>
 
-      <!-- Indicadores Inferiores -->
-      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-3 bg-brand-sand/95 border border-brand-roseGold/30 px-4 py-2 rounded-full shadow-sm">
-        <button onclick="goToSlide(0)" aria-label="Slide 1" class="carousel-dot w-8 h-2.5 rounded-full bg-brand-roseGold transition-all duration-500"></button>
-        <button onclick="goToSlide(1)" aria-label="Slide 2" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
-        <button onclick="goToSlide(2)" aria-label="Slide 3" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
-        <button onclick="goToSlide(3)" aria-label="Slide 4" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
-        <button onclick="goToSlide(4)" aria-label="Slide 5" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAIXA APRESENTAÇÃO -->
-  <section class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-16 text-center reveal scroll-mt-44">
-    <div class="inline-flex items-center gap-2 bg-brand-blush/80 text-brand-deepRose border border-brand-roseGold/25 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium uppercase tracking-wider mb-6">
-      📍 Atendimento em Hortolândia - SP e Região • Trabalho 100% Artesanal
-    </div>
-    <h1 class="font-script text-4xl sm:text-6xl lg:text-[62px] font-normal text-brand-deepRose leading-tight mb-6 max-w-4xl mx-auto">
-      Peças únicas feitas à mão para eternizar momentos de fé e carinho.
-    </h1>
-    <p class="text-base sm:text-lg text-brand-taupe leading-relaxed max-w-3xl mx-auto mb-9">
-      Na <strong>Personalizando Por Amor</strong>, cuidamos de cada detalhe para transformar <strong>Bíblias, Hinários, Agendas e Cartões</strong> em recordações inesquecíveis. Você escolhe as cores, o revestimento, o nome gravado na placa e a mensagem do cartão.
-    </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20encomenda%20personalizada." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl text-xs sm:text-sm font-medium uppercase tracking-widest pl-3.5 pr-8 py-3.5 rounded-full shadow-md transition flex items-center justify-center gap-3">
-        <span class="w-9 h-9 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
-          <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
-        </span>
-        <span>Criar Meu Personalizado</span>
-      </a>
-      <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="group w-full sm:w-auto bg-gradient-to-r from-brand-pearl via-brand-ivory to-brand-blush/60 hover:from-brand-blush/50 hover:to-brand-pearl border border-brand-roseGold/45 hover:border-brand-roseGold pl-3.5 pr-7 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center gap-3.5">
-        <span class="w-9 h-9 rounded-xl bg-instagram-original text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
-          <svg class="w-5 h-5 fill-current"><use href="#icone-instagram"></use></svg>
-        </span>
-        <span class="text-left leading-tight">
-          <span class="block text-[10px] uppercase tracking-[0.2em] text-brand-roseGold font-semibold">Siga nosso perfil</span>
-          <span class="block font-serif italic text-base sm:text-lg text-brand-mocha font-medium">@personalizando_por_amor</span>
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <!-- CATÁLOGO DE PRODUTOS -->
-  <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20 scroll-mt-44">
-    <div class="max-w-6xl mx-auto px-4 sm:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
-        <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Nosso Catálogo</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-brand-mocha mb-3">O Que Personalizamos Para Você</h2>
-        <p class="text-sm sm:text-base text-brand-taupe">Acabamento impecável, materiais selecionados e personalização completa para presentear ou usar no dia a dia.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between reveal">
-          <div>
-            <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Mais Pedido</span>
-            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Bíblias & Hinários</h3>
-            <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
-              Capas em manta de strass, pérolas ou glitter fino, placas metálicas espelhadas gravadas com seu nome, fechos de luxo, cantoneiras douradas, marcadores com tassel e apliques musicais.
-            </p>
-          </div>
-          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20or%C3%A7ar%20uma%20B%C3%ADblia%20ou%20Hin%C3%A1rio%20personalizado." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
-            <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
-            <span>Pedir com Carinho &rarr;</span>
-          </a>
-        </div>
-        <!-- Card 2 -->
-        <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between reveal" style="transition-delay: 150ms;">
-          <div>
-            <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Organização</span>
-            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Agendas & Cadernos</h3>
-            <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
-              Agendas anuais, planners e cadernos personalizados com seu nome, inicial ou profissão. Capas duras resistentes e acabamento delicado para acompanhar sua rotina.
-            </p>
-          </div>
-          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20or%C3%A7ar%20uma%20Agenda%20personalizada." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
-            <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
-            <span>Escolher Minha Capa &rarr;</span>
-          </a>
-        </div>
-        <!-- Card 3 -->
-        <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between reveal" style="transition-delay: 300ms;">
-          <div>
-            <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Kits Presente</span>
-            <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Cartões & Caixas</h3>
-            <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
-              Caixas rígidas decoradas com o nome do presenteado e cartões florais com mensagens de fé e gratidão impressas sob medida para emocionar quem você ama.
-            </p>
-          </div>
-          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20Cart%C3%B5es%20e%20Kits%20Presente." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
-            <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
-            <span>Montar Meu Kit &rarr;</span>
-          </a>
+        <!-- Indicadores Inferiores -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center space-x-3 bg-brand-sand/95 border border-brand-roseGold/30 px-4 py-2 rounded-full shadow-sm">
+          <button onclick="goToSlide(0)" aria-label="Slide 1" class="carousel-dot w-8 h-2.5 rounded-full bg-brand-roseGold transition-all duration-500"></button>
+          <button onclick="goToSlide(1)" aria-label="Slide 2" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+          <button onclick="goToSlide(2)" aria-label="Slide 3" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+          <button onclick="goToSlide(3)" aria-label="Slide 4" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
+          <button onclick="goToSlide(4)" aria-label="Slide 5" class="carousel-dot w-2.5 h-2.5 rounded-full bg-brand-roseGold/40 transition-all duration-500"></button>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 3. DEPOIMENTOS (PROVA SOCIAL) -->
-  <section id="depoimentos" class="relative z-10 py-16 bg-brand-pearl scroll-mt-44">
-    <div class="max-w-6xl mx-auto px-4 sm:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-        <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Com carinho, para você</span>
-        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-brand-mocha mb-3">O Que Nossas Clientes Dizem</h2>
+    <!-- FAIXA APRESENTAÇÃO -->
+    <section class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-16 text-center reveal">
+      <div class="inline-flex items-center gap-2 bg-brand-blush/80 text-brand-deepRose border border-brand-roseGold/25 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium uppercase tracking-wider mb-6">
+        📍 Atendimento em Hortolândia - SP e Região • Trabalho 100% Artesanal
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-brand-ivory/60 p-6 rounded-2xl border border-brand-roseGold/20 shadow-sm reveal">
-          <div class="text-brand-roseGold text-lg mb-3">★★★★★</div>
-          <p class="text-sm sm:text-base text-brand-taupe italic mb-4">"Amei cada detalhe! O trabalho é perfeito, super caprichoso. Minha Bíblia ficou maravilhosa. Muito obrigada por tanto cuidado!"</p>
-          <p class="text-xs sm:text-sm font-bold text-brand-mocha uppercase tracking-widest">— Maria Silva</p>
-        </div>
-        <div class="bg-brand-ivory/60 p-6 rounded-2xl border border-brand-roseGold/20 shadow-sm reveal" style="transition-delay: 150ms;">
-          <div class="text-brand-roseGold text-lg mb-3">★★★★★</div>
-          <p class="text-sm sm:text-base text-brand-taupe italic mb-4">"Comprei para presentear minha mãe e ela chorou de emoção. A caixa e o cartão deram um toque super especial. Que Deus abençoe!"</p>
-          <p class="text-xs sm:text-sm font-bold text-brand-mocha uppercase tracking-widest">— Ana Paula</p>
-        </div>
-        <div class="bg-brand-ivory/60 p-6 rounded-2xl border border-brand-roseGold/20 shadow-sm reveal" style="transition-delay: 300ms;">
-          <div class="text-brand-roseGold text-lg mb-3">★★★★★</div>
-          <p class="text-sm sm:text-base text-brand-taupe italic mb-4">"Atendimento impecável desde a escolha do material até a entrega da encomenda. Indico de olhos fechados, virei cliente com certeza!"</p>
-          <p class="text-xs sm:text-sm font-bold text-brand-mocha uppercase tracking-widest">— Camila R.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMO FUNCIONA -->
-  <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center scroll-mt-44 border-t border-brand-roseGold/20">
-    <h2 class="font-script text-4xl sm:text-6xl font-normal text-brand-deepRose mb-12 reveal">
-      Como Fazer Sua Encomenda
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm reveal">
-        <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">01</span>
-        <h3 class="font-semibold text-lg text-brand-mocha mb-2">Converse Conosco</h3>
-        <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Escolha o modelo que tocou seu coração e clique no botão do WhatsApp para um atendimento acolhedor e personalizado.</p>
-      </div>
-      <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm reveal" style="transition-delay: 150ms;">
-        <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">02</span>
-        <h3 class="font-semibold text-lg text-brand-mocha mb-2">Defina os Detalhes</h3>
-        <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Escolha a cor do glitter ou strass, o modelo das cantoneiras, o nome para gravação na placa e o texto do cartão.</p>
-      </div>
-      <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm reveal" style="transition-delay: 300ms;">
-        <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">03</span>
-        <h3 class="font-semibold text-lg text-brand-mocha mb-2">Feito com Carinho</h3>
-        <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Confeccionamos sua peça artesanalmente em Hortolândia - SP com todo cuidado. (Enviamos para todo o Brasil!).</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CHAMADA FINAL -->
-  <section class="relative z-10 bg-brand-blush/30 py-16 px-4 sm:px-6 text-center border-t border-brand-roseGold/25 reveal">
-    <div class="max-w-3xl mx-auto">
-      <div class="w-40 h-40 sm:w-44 sm:h-44 mx-auto mb-3 flex items-center justify-center">
-        <img src="Logo.jpg" onerror="this.onerror=null;this.src='Logo_2.jpg';" alt="Logo Personalizando Por Amor" class="w-full h-full logo-perfeito">
-      </div>
-      <div class="whitespace-nowrap leading-none mb-2 flex items-baseline justify-center gap-2.5">
-        <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
-        <span class="font-serif text-lg sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
-      </div>
-      <p class="font-serif italic text-xl sm:text-2xl text-brand-roseGold font-medium mb-6">
-        ♥ Feito com Carinho ♥
-      </p>
-      <p class="text-base sm:text-lg text-brand-taupe mb-8">
-        Será uma alegria preparar uma peça especial para você ou para presentear quem você ama!
+      <h1 class="font-script text-4xl sm:text-6xl lg:text-[62px] font-normal text-brand-deepRose leading-tight mb-6 max-w-4xl mx-auto">
+        Peças únicas feitas à mão para eternizar momentos de fé e carinho.
+      </h1>
+      <p class="text-base sm:text-lg text-brand-taupe leading-relaxed max-w-3xl mx-auto mb-9">
+        Na <strong>Personalizando Por Amor</strong>, cuidamos de cada detalhe para transformar <strong>Bíblias, Hinários, Agendas e Cartões</strong> em recordações inesquecíveis. Você escolhe as cores, o revestimento, o nome gravado na placa e a mensagem do cartão.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl text-xs sm:text-sm font-medium uppercase tracking-widest pl-3.5 pr-8 py-3.5 rounded-full shadow-md transition flex items-center justify-center gap-3">
+        <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20encomenda%20personalizada." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl text-xs sm:text-sm font-medium uppercase tracking-widest pl-3.5 pr-8 py-3.5 rounded-full shadow-md transition flex items-center justify-center gap-3">
           <span class="w-9 h-9 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
             <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
           </span>
-          <span>Conversar pelo WhatsApp</span>
+          <span>Criar Meu Personalizado</span>
+        </a>
+        <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="group w-full sm:w-auto bg-gradient-to-r from-brand-pearl via-brand-ivory to-brand-blush/60 hover:from-brand-blush/50 hover:to-brand-pearl border border-brand-roseGold/45 hover:border-brand-roseGold pl-3.5 pr-7 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center gap-3.5">
+          <span class="w-9 h-9 rounded-xl bg-instagram-original text-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+            <svg class="w-5 h-5 fill-current"><use href="#icone-instagram"></use></svg>
+          </span>
+          <span class="text-left leading-tight">
+            <span class="block text-[10px] uppercase tracking-[0.2em] text-brand-roseGold font-semibold">Siga nosso perfil</span>
+            <span class="block font-serif italic text-base sm:text-lg text-brand-mocha font-medium">@personalizando_por_amor</span>
+          </span>
         </a>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUTOS -->
+    <section id="produtos" class="relative z-10 py-16 bg-brand-sand/35 border-y border-brand-roseGold/20 scroll-mt-44">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+          <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Nosso Catálogo</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-brand-mocha mb-3">O Que Personalizamos Para Você</h2>
+          <p class="text-sm sm:text-base text-brand-taupe">Acabamento impecável, materiais selecionados e personalização completa para presentear ou usar no dia a dia.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between reveal">
+            <div>
+              <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Mais Pedido</span>
+              <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Bíblias & Hinários</h3>
+              <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
+                Capas em manta de strass, pérolas ou glitter fino, placas metálicas espelhadas gravadas com seu nome, fechos de luxo, cantoneiras douradas, marcadores com tassel e apliques musicais.
+              </p>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20or%C3%A7ar%20uma%20B%C3%ADblia%20ou%20Hin%C3%A1rio%20personalizado." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
+              <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
+              <span>Pedir com Carinho &rarr;</span>
+            </a>
+          </div>
+          <!-- Card 2 -->
+          <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between reveal" style="transition-delay: 150ms;">
+            <div>
+              <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Organização</span>
+              <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Agendas & Cadernos</h3>
+              <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
+                Agendas anuais, planners e cadernos personalizados com seu nome, inicial ou profissão. Capas duras resistentes e acabamento delicado para acompanhar sua rotina.
+              </p>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20or%C3%A7ar%20uma%20Agenda%20personalizada." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
+              <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
+              <span>Escolher Minha Capa &rarr;</span>
+            </a>
+          </div>
+          <!-- Card 3 -->
+          <div class="bg-brand-pearl rounded-2xl p-7 border border-brand-roseGold/25 hover:shadow-lg transition flex flex-col justify-between reveal" style="transition-delay: 300ms;">
+            <div>
+              <span class="inline-block text-xs font-medium uppercase tracking-wider bg-brand-blush/80 text-brand-deepRose px-3.5 py-1 rounded-full mb-4">Kits Presente</span>
+              <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-brand-mocha mb-3">Cartões & Caixas</h3>
+              <p class="text-sm sm:text-base text-brand-taupe leading-relaxed mb-6">
+                Caixas rígidas decoradas com o nome do presenteado e cartões florais com mensagens de fé e gratidão impressas sob medida para emocionar quem você ama.
+              </p>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20Cart%C3%B5es%20e%20Kits%20Presente." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-brand-roseGold hover:text-brand-deepRose">
+              <svg class="w-4 h-4 fill-brand-whatsapp flex-shrink-0"><use href="#icone-whatsapp"></use></svg>
+              <span>Montar Meu Kit &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. DEPOIMENTOS (PROVA SOCIAL) -->
+    <section id="depoimentos" class="relative z-10 py-16 bg-brand-pearl scroll-mt-44">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+          <span class="text-xs uppercase tracking-widest text-brand-roseGold font-semibold block mb-2">Com carinho, para você</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-brand-mocha mb-3">O Que Nossas Clientes Dizem</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-brand-ivory/60 p-6 rounded-2xl border border-brand-roseGold/20 shadow-sm reveal">
+            <div class="text-brand-roseGold text-lg mb-3">★★★★★</div>
+            <p class="text-sm sm:text-base text-brand-taupe italic mb-4">"Amei cada detalhe! O trabalho é perfeito, super caprichoso. Minha Bíblia ficou maravilhosa. Muito obrigada por tanto cuidado!"</p>
+            <p class="text-xs sm:text-sm font-bold text-brand-mocha uppercase tracking-widest">— Maria Silva</p>
+          </div>
+          <div class="bg-brand-ivory/60 p-6 rounded-2xl border border-brand-roseGold/20 shadow-sm reveal" style="transition-delay: 150ms;">
+            <div class="text-brand-roseGold text-lg mb-3">★★★★★</div>
+            <p class="text-sm sm:text-base text-brand-taupe italic mb-4">"Comprei para presentear minha mãe e ela chorou de emoção. A caixa e o cartão deram um toque super especial. Que Deus abençoe!"</p>
+            <p class="text-xs sm:text-sm font-bold text-brand-mocha uppercase tracking-widest">— Ana Paula</p>
+          </div>
+          <div class="bg-brand-ivory/60 p-6 rounded-2xl border border-brand-roseGold/20 shadow-sm reveal" style="transition-delay: 300ms;">
+            <div class="text-brand-roseGold text-lg mb-3">★★★★★</div>
+            <p class="text-sm sm:text-base text-brand-taupe italic mb-4">"Atendimento impecável desde a escolha do material até a entrega da encomenda. Indico de olhos fechados, virei cliente com certeza!"</p>
+            <p class="text-xs sm:text-sm font-bold text-brand-mocha uppercase tracking-widest">— Camila R.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="relative z-10 py-16 px-4 sm:px-8 max-w-6xl mx-auto text-center scroll-mt-44 border-t border-brand-roseGold/20">
+      <h2 class="font-script text-4xl sm:text-6xl font-normal text-brand-deepRose mb-12 reveal">
+        Como Fazer Sua Encomenda
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm reveal">
+          <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">01</span>
+          <h3 class="font-semibold text-lg text-brand-mocha mb-2">Converse Conosco</h3>
+          <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Escolha o modelo que tocou seu coração e clique no botão do WhatsApp para um atendimento acolhedor e personalizado.</p>
+        </div>
+        <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm reveal" style="transition-delay: 150ms;">
+          <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">02</span>
+          <h3 class="font-semibold text-lg text-brand-mocha mb-2">Defina os Detalhes</h3>
+          <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Escolha a cor do glitter ou strass, o modelo das cantoneiras, o nome para gravação na placa e o texto do cartão.</p>
+        </div>
+        <div class="bg-brand-pearl p-8 rounded-2xl border border-brand-roseGold/25 shadow-sm reveal" style="transition-delay: 300ms;">
+          <span class="text-4xl font-serif font-semibold text-brand-roseGold block mb-2">03</span>
+          <h3 class="font-semibold text-lg text-brand-mocha mb-2">Feito com Carinho</h3>
+          <p class="text-sm sm:text-base text-brand-taupe leading-relaxed">Confeccionamos sua peça artesanalmente em Hortolândia - SP com todo cuidado. (Enviamos para todo o Brasil!).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAMADA FINAL -->
+    <section class="relative z-10 bg-brand-blush/30 py-16 px-4 sm:px-6 text-center border-t border-brand-roseGold/25 reveal">
+      <div class="max-w-3xl mx-auto">
+        <div class="w-40 h-40 sm:w-44 sm:h-44 mx-auto mb-3 flex items-center justify-center">
+          <img src="Logo.jpg" onerror="this.onerror=null;this.src='Logo_2.jpg';" alt="Logo Personalizando Por Amor" class="w-full h-full logo-perfeito">
+        </div>
+        <div class="whitespace-nowrap leading-none mb-2 flex items-baseline justify-center gap-2.5">
+          <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
+          <span class="font-serif text-lg sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
+        </div>
+        <p class="font-serif italic text-xl sm:text-2xl text-brand-roseGold font-medium mb-6">
+          ♥ Feito com Carinho ♥
+        </p>
+        <p class="text-base sm:text-lg text-brand-taupe mb-8">
+          Será uma alegria preparar uma peça especial para você ou para presentear quem você ama!
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-roseGold hover:bg-brand-deepRose text-brand-pearl text-xs sm:text-sm font-medium uppercase tracking-widest pl-3.5 pr-8 py-3.5 rounded-full shadow-md transition flex items-center justify-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-brand-pearl flex items-center justify-center shadow-sm flex-shrink-0">
+              <svg class="w-5 h-5 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+            </span>
+            <span>Conversar pelo WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 py-10 px-4 sm:px-6 text-center text-sm">
+      <div class="whitespace-nowrap mb-1 flex items-baseline justify-center gap-2">
+        <span class="font-script text-3xl sm:text-4xl text-brand-blush">Personalizando</span>
+        <span class="font-serif text-base sm:text-xl font-medium uppercase tracking-[0.18em] text-brand-pearl">POR AMOR</span>
+      </div>
+      <p class="font-serif italic text-lg sm:text-xl text-brand-blush mb-3">♥ Feito com Carinho ♥</p>
+      <p class="mb-3 text-brand-sand/90 text-xs sm:text-sm flex flex-wrap items-center justify-center gap-3">
+        <span>Hortolândia - SP</span>
+        <span>•</span>
+        <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="hover:text-brand-blush underline inline-flex items-center gap-1.5">
+          <svg class="w-4 h-4 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
+          <span>Atendimento via WhatsApp</span>
+        </a>
+        <span>•</span>
+        <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="hover:text-brand-blush underline inline-flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded bg-instagram-original text-white inline-flex items-center justify-center">
+            <svg class="w-3 h-3 fill-current"><use href="#icone-instagram"></use></svg>
+          </span>
+          <span>@personalizando_por_amor</span>
+        </a>
+      </p>
+      <p class="text-xs text-brand-sand/50">© 2026 Personalizando Por Amor. Todos os direitos reservados.</p>
+    </footer>
+
+  </main>
 
   <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
   <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Vim%20pelo%20site%20Personalizando%20Por%20Amor%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-50 bg-brand-pearl hover:bg-brand-ivory text-brand-mocha pl-2.5 pr-4 py-2 sm:pl-3 sm:pr-5 sm:py-2.5 rounded-full shadow-xl border border-brand-roseGold/40 flex items-center gap-2 font-medium text-xs sm:text-sm transition transform hover:scale-105">
@@ -646,32 +676,7 @@
     <span>Fale com a gente!</span>
   </a>
 
-  <!-- RODAPÉ -->
-  <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 py-10 px-4 sm:px-6 text-center text-sm">
-    <div class="whitespace-nowrap mb-1 flex items-baseline justify-center gap-2">
-      <span class="font-script text-3xl sm:text-4xl text-brand-blush">Personalizando</span>
-      <span class="font-serif text-base sm:text-xl font-medium uppercase tracking-[0.18em] text-brand-pearl">POR AMOR</span>
-    </div>
-    <p class="font-serif italic text-lg sm:text-xl text-brand-blush mb-3">♥ Feito com Carinho ♥</p>
-    <p class="mb-3 text-brand-sand/90 text-xs sm:text-sm flex flex-wrap items-center justify-center gap-3">
-      <span>Hortolândia - SP</span>
-      <span>•</span>
-      <a href="https://api.whatsapp.com/send?phone=5519989269711&text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="hover:text-brand-blush underline inline-flex items-center gap-1.5">
-        <svg class="w-4 h-4 fill-brand-whatsapp"><use href="#icone-whatsapp"></use></svg>
-        <span>Atendimento via WhatsApp</span>
-      </a>
-      <span>•</span>
-      <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="hover:text-brand-blush underline inline-flex items-center gap-1.5">
-        <span class="w-4 h-4 rounded bg-instagram-original text-white inline-flex items-center justify-center">
-          <svg class="w-3 h-3 fill-current"><use href="#icone-instagram"></use></svg>
-        </span>
-        <span>@personalizando_por_amor</span>
-      </a>
-    </p>
-    <p class="text-xs text-brand-sand/50">© 2026 Personalizando Por Amor. Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- SCRIPTS GERAIS (Carrossel, Swipe, Hover, Scroll Reveal e Histerese) -->
+  <!-- SCRIPTS GERAIS -->
   <script>
     // --- LÓGICA DO CARROSSEL ---
     let currentSlide = 0;
@@ -708,7 +713,7 @@
       slideTimer = setInterval(() => {
         let nextIndex = (currentSlide + 1) % slides.length;
         showSlide(nextIndex);
-      }, 10000); // 10 segundos
+      }, 10000);
     }
 
     function changeSlide(direction) {
@@ -722,7 +727,6 @@
       resetTimer();
     }
 
-    // Inicia o timer
     resetTimer();
 
     // --- PAUSA NO HOVER E SWIPE (ARRASTAR) ---
@@ -733,21 +737,21 @@
     let endX = 0;
     carouselContainer.addEventListener('touchstart', (e) => {
       startX = e.changedTouches[0].screenX;
-      clearInterval(slideTimer); // Pausa ao tocar na tela
+      clearInterval(slideTimer);
     }, {passive: true});
 
     carouselContainer.addEventListener('touchend', (e) => {
       endX = e.changedTouches[0].screenX;
       handleSwipe();
-      resetTimer(); // Retoma ao soltar
+      resetTimer();
     }, {passive: true});
 
     function handleSwipe() {
-      let swipeThreshold = 50; // Distância mínima para considerar que foi um arrasto
+      let swipeThreshold = 50; 
       if (endX < startX - swipeThreshold) {
-        changeSlide(1); // Arrastou pra esquerda -> Próximo
+        changeSlide(1); 
       } else if (endX > startX + swipeThreshold) {
-        changeSlide(-1); // Arrastou pra direita -> Anterior
+        changeSlide(-1); 
       }
     }
 
