@@ -35,7 +35,7 @@
               blush: '#E3CFC2',     /* Destaque rosê chá delicado */
               roseGold: '#A86E58',  /* Ouro rosê do logo */
               deepRose: '#87533E',  /* Cobre profundo para hover e destaques */
-              mocha: '#3D2E28',     /* Marrom café suave para títulos */
+              mocha: '#3D2E28',     /* Marrom café suave para titles */
               taupe: '#5E4B43',     /* Marrom médio suave para textos */
               whatsapp: '#25D366'   /* Verde original oficial do WhatsApp */
             }
@@ -50,7 +50,7 @@
     }
   </script>
   <style>
-    /* Ocultamos o overflow-x apenas onde é necessário e deixamos o html livre para o Sticky funcionar */
+    /* Deixamos o html livre para o Sticky funcionar */
     html { scroll-behavior: smooth; }
 
     /* Estrutura em Grid para o Carrossel nunca cortar botões nem sobrepor elementos no celular */
@@ -94,7 +94,7 @@
 
     /* Compactação suave do topo fixo quando o usuário rola a página */
     #topo-fixo {
-      transition: padding 0.35s ease, box-shadow 0.35s ease;
+      transition: padding 0.35s ease;
     }
     #logo-container {
       transition: width 0.35s ease, height 0.35s ease;
@@ -217,14 +217,12 @@
     </svg>
   </div>
 
-  <!-- HEADER COMPLETO FIXED: Agrupa o Logo e o Menu para rolarem juntos e FICAREM NO TOPO -->
-  <header class="sticky top-0 z-50 w-full bg-brand-ivory/95 backdrop-blur-md shadow-sm border-b border-brand-roseGold/25 flex flex-col">
-    
-    <!-- PARTE 1: LOGO E TÍTULO (Encolhe ao rolar) -->
-    <div id="topo-fixo" class="pt-3 pb-2.5 px-4 sm:px-8 text-center">
+  <!-- HEADER FIXO: APENAS O LOGO E O TÍTULO (Como na imagem) -->
+  <header class="sticky top-0 z-50 w-full bg-brand-ivory/95 backdrop-blur-md shadow-sm border-b border-brand-roseGold/25">
+    <div id="topo-fixo" class="pt-3 pb-2.5 px-4 sm:px-8 text-center transition-all duration-300">
       <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
         <a href="#" class="inline-flex flex-col items-center group">
-          <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5">
+          <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5 transition-all duration-300">
             <img src="Logo.jpg" onerror="this.onerror=null;this.src='Logo_2.jpg';" 
                  alt="Logo Personalizando Por Amor" 
                  class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-300">
@@ -241,9 +239,13 @@
         </a>
       </div>
     </div>
+  </header>
 
-    <!-- PARTE 2: MENU DE NAVEGAÇÃO -->
-    <div class="border-t border-brand-roseGold/10 py-3 px-3 sm:px-8">
+  <!-- ISOLAMENTO DE ROLAGEM: O conteúdo do site rola normalmente aqui dentro -->
+  <main class="w-full overflow-x-hidden">
+    
+    <!-- BARRA DE NAVEGAÇÃO: Fica logo abaixo do header, rola junto com o site -->
+    <div class="relative z-20 w-full bg-brand-ivory/80 border-b border-brand-roseGold/20 py-3 px-3 sm:px-8">
       <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
         <span class="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-brand-taupe/90 font-medium text-center">
           Bíblias • Hinários • Agendas • Cartões
@@ -263,12 +265,8 @@
         </nav>
       </div>
     </div>
-  </header>
 
-  <!-- ISOLAMENTO DE ROLAGEM: Essa tag 'main' garante que o site não passe da largura da tela, deixando o Header livre para ficar no topo -->
-  <main class="w-full overflow-x-hidden">
-    
-    <!-- BANNER CARROSSEL -->
+    <!-- BANNER CARROSSEL COM SWIPE E HOVER PAUSE -->
     <section id="destaques" class="relative z-10 w-full overflow-hidden bg-brand-sand/55 border-b border-brand-roseGold/30 scroll-mt-44">
       <div class="relative w-full carousel-grid" id="carousel-container">
 
