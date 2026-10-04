@@ -35,7 +35,7 @@
               blush: '#E3CFC2',     /* Destaque rosê chá delicado */
               roseGold: '#A86E58',  /* Ouro rosê do logo */
               deepRose: '#87533E',  /* Cobre profundo para hover e destaques */
-              mocha: '#3D2E28',     /* Marrom café suave para titles */
+              mocha: '#3D2E28',     /* Marrom café suave para títulos */
               taupe: '#5E4B43',     /* Marrom médio suave para textos */
               whatsapp: '#25D366'   /* Verde original oficial do WhatsApp */
             }
@@ -50,7 +50,7 @@
     }
   </script>
   <style>
-    /* Deixamos o html livre para o Sticky funcionar */
+    /* Deixamos o html livre para o Sticky funcionar no celular */
     html { scroll-behavior: smooth; }
 
     /* Estrutura em Grid para o Carrossel nunca cortar botões nem sobrepor elementos no celular */
@@ -92,20 +92,29 @@
       mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 72%);
     }
 
-    /* Compactação suave do topo fixo quando o usuário rola a página */
+    /* COMPACTAÇÃO HIPER SUAVE DO TOPO (Transições Delicadas) */
     #topo-fixo {
-      transition: padding 0.35s ease;
+      transition: padding 0.8s cubic-bezier(0.25, 1, 0.35, 1);
     }
     #logo-container {
-      transition: width 0.35s ease, height 0.35s ease;
+      transition: width 0.8s cubic-bezier(0.25, 1, 0.35, 1), height 0.8s cubic-bezier(0.25, 1, 0.35, 1);
     }
+    #textos-topo {
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1);
+      transform-origin: top center;
+    }
+
+    /* Estados da rolagem (Quando o usuário desce a página) */
     body.rolando #topo-fixo {
-      padding-top: 0.35rem;
-      padding-bottom: 0.35rem;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
     }
     body.rolando #logo-container {
-      width: 4.5rem;
-      height: 4.5rem;
+      width: 3.8rem;
+      height: 3.8rem;
+    }
+    body.rolando #textos-topo {
+      transform: scale(0.92);
     }
 
     /* ANIMAÇÕES DE ENTRADA (SCROLL REVEAL) */
@@ -217,24 +226,27 @@
     </svg>
   </div>
 
-  <!-- HEADER FIXO: APENAS O LOGO E O TÍTULO (Como na imagem) -->
+  <!-- HEADER FIXO NO TOPO: APENAS LOGO E TÍTULO -->
   <header class="sticky top-0 z-50 w-full bg-brand-ivory/95 backdrop-blur-md shadow-sm border-b border-brand-roseGold/25">
-    <div id="topo-fixo" class="pt-3 pb-2.5 px-4 sm:px-8 text-center transition-all duration-300">
+    <div id="topo-fixo" class="pt-3 pb-2.5 px-4 sm:px-8 text-center">
       <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
         <a href="#" class="inline-flex flex-col items-center group">
-          <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5 transition-all duration-300">
+          <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5">
             <img src="Logo.jpg" onerror="this.onerror=null;this.src='Logo_2.jpg';" 
                  alt="Logo Personalizando Por Amor" 
                  class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-300">
           </div>
-          <div class="whitespace-nowrap flex items-baseline justify-center gap-2 sm:gap-2.5 leading-none mb-1">
-            <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
-            <span class="font-serif text-base sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
-          </div>
-          <div class="font-serif italic text-sm sm:text-xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
-            <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
-            <span>Feito com Carinho</span>
-            <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
+          
+          <div id="textos-topo" class="flex flex-col items-center">
+            <div class="whitespace-nowrap flex items-baseline justify-center gap-2 sm:gap-2.5 leading-none mb-1">
+              <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
+              <span class="font-serif text-base sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
+            </div>
+            <div class="font-serif italic text-sm sm:text-xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
+              <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
+              <span>Feito com Carinho</span>
+              <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
+            </div>
           </div>
         </a>
       </div>
@@ -244,7 +256,7 @@
   <!-- ISOLAMENTO DE ROLAGEM: O conteúdo do site rola normalmente aqui dentro -->
   <main class="w-full overflow-x-hidden">
     
-    <!-- BARRA DE NAVEGAÇÃO: Fica logo abaixo do header, rola junto com o site -->
+    <!-- BARRA DE NAVEGAÇÃO: Fica abaixo do Logo, rola para cima normalmente -->
     <div class="relative z-20 w-full bg-brand-ivory/80 border-b border-brand-roseGold/20 py-3 px-3 sm:px-8">
       <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
         <span class="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-brand-taupe/90 font-medium text-center">
@@ -640,7 +652,7 @@
     </section>
 
     <!-- RODAPÉ -->
-    <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 py-10 px-4 sm:px-6 text-center text-sm">
+    <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 pt-10 pb-24 sm:pb-10 px-4 sm:px-6 text-center text-sm">
       <div class="whitespace-nowrap mb-1 flex items-baseline justify-center gap-2">
         <span class="font-script text-3xl sm:text-4xl text-brand-blush">Personalizando</span>
         <span class="font-serif text-base sm:text-xl font-medium uppercase tracking-[0.18em] text-brand-pearl">POR AMOR</span>
