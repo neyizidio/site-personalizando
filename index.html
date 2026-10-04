@@ -50,10 +50,9 @@
     }
   </script>
   <style>
-    /* Deixamos o html livre para o Sticky funcionar no celular */
     html { scroll-behavior: smooth; }
 
-    /* Estrutura em Grid para o Carrossel nunca cortar botões nem sobrepor elementos no celular */
+    /* Estrutura em Grid para o Carrossel */
     .carousel-grid {
       display: grid;
       grid-template-columns: 100%;
@@ -82,7 +81,7 @@
       opacity: 1;
     }
 
-    /* Centraliza perfeitamente o logo inteiro sem fundo */
+    /* Logo sem fundo */
     .logo-perfeito {
       object-fit: cover;
       object-position: 51.2% 50%;
@@ -92,32 +91,39 @@
       mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 72%);
     }
 
-    /* COMPACTAÇÃO HIPER SUAVE DO TOPO (Transições Delicadas) */
-    #topo-fixo {
-      transition: padding 0.8s cubic-bezier(0.25, 1, 0.35, 1);
+    /* === TRANSIÇÕES SUPER SUAVES DO TOPO === */
+    #topo-fixo, #insta-suspenso {
+      transition: padding 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      will-change: padding;
     }
     #logo-container {
-      transition: width 0.8s cubic-bezier(0.25, 1, 0.35, 1), height 0.8s cubic-bezier(0.25, 1, 0.35, 1);
+      transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+      will-change: width, height;
     }
     #textos-topo {
-      transition: transform 0.8s cubic-bezier(0.25, 1, 0.35, 1);
-      transform-origin: top center;
+      transition: transform 0.5s ease-in-out;
+      transform-origin: center top;
+      will-change: transform;
     }
 
-    /* Estados da rolagem (Quando o usuário desce a página) */
+    /* === ESTADOS REDUZIDOS (QUANDO ROLA A PÁGINA) === */
     body.rolando #topo-fixo {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
     }
     body.rolando #logo-container {
-      width: 3.8rem;
-      height: 3.8rem;
+      width: 3.5rem;
+      height: 3.5rem;
     }
     body.rolando #textos-topo {
-      transform: scale(0.92);
+      transform: scale(0.85); /* Encolhe delicadamente em 15% */
+    }
+    body.rolando #insta-suspenso {
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
     }
 
-    /* ANIMAÇÕES DE ENTRADA (SCROLL REVEAL) */
+    /* Scroll Reveal */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -136,7 +142,7 @@
 </head>
 <body class="bg-brand-ivory text-brand-taupe font-sans antialiased text-base relative w-full">
 
-  <!-- Símbolos SVG Reutilizáveis: Ícones e Desenhos à Mão -->
+  <!-- SVG Icons -->
   <svg class="hidden" aria-hidden="true">
     <symbol id="icone-whatsapp" viewBox="0 0 24 24">
       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
@@ -199,7 +205,7 @@
     </symbol>
   </svg>
 
-  <!-- CAMADA EXCLUSIVA DE TRÁS DA PÁGINA (FUNDO DESENHADO) -->
+  <!-- Fundo Padronagem Exclusiva -->
   <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden text-brand-roseGold" aria-hidden="true">
     <svg class="w-full h-full opacity-[0.19]">
       <defs>
@@ -226,37 +232,51 @@
     </svg>
   </div>
 
-  <!-- HEADER FIXO NO TOPO: APENAS LOGO E TÍTULO -->
-  <header class="sticky top-0 z-50 w-full bg-brand-ivory/95 backdrop-blur-md shadow-sm border-b border-brand-roseGold/25">
-    <div id="topo-fixo" class="pt-3 pb-2.5 px-4 sm:px-8 text-center">
-      <div class="max-w-7xl mx-auto flex flex-col items-center justify-center">
-        <a href="#" class="inline-flex flex-col items-center group">
-          <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5">
-            <img src="Logo.jpg" onerror="this.onerror=null;this.src='Logo_2.jpg';" 
-                 alt="Logo Personalizando Por Amor" 
-                 class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-300">
+  <!-- ============================================== -->
+  <!-- HEADER FIXO (LOGO, TEXTOS E BOTÃO INSTAGRAM)   -->
+  <!-- ============================================== -->
+  <header class="sticky top-0 z-50 w-full bg-brand-ivory/95 backdrop-blur-md shadow-sm border-b border-brand-roseGold/25 flex flex-col">
+    
+    <!-- Parte 1: Logo e Frases -->
+    <div id="topo-fixo" class="pt-3 pb-2.5 px-4 sm:px-8 text-center flex flex-col items-center">
+      <a href="#" class="inline-flex flex-col items-center group w-full">
+        <div id="logo-container" class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center mb-0.5">
+          <img src="Logo.jpg" onerror="this.onerror=null;this.src='Logo_2.jpg';" 
+               alt="Logo Personalizando Por Amor" 
+               class="w-full h-full logo-perfeito group-hover:scale-105 transition-transform duration-500">
+        </div>
+        
+        <div id="textos-topo" class="flex flex-col items-center">
+          <div class="whitespace-nowrap flex items-baseline justify-center gap-2 sm:gap-2.5 leading-none mb-1">
+            <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
+            <span class="font-serif text-base sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
           </div>
-          
-          <div id="textos-topo" class="flex flex-col items-center">
-            <div class="whitespace-nowrap flex items-baseline justify-center gap-2 sm:gap-2.5 leading-none mb-1">
-              <span class="font-script text-3xl sm:text-5xl text-brand-roseGold font-normal">Personalizando</span>
-              <span class="font-serif text-base sm:text-2xl font-medium uppercase tracking-[0.18em] text-brand-deepRose">POR AMOR</span>
-            </div>
-            <div class="font-serif italic text-sm sm:text-xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
-              <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
-              <span>Feito com Carinho</span>
-              <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
-            </div>
+          <div class="font-serif italic text-sm sm:text-xl text-brand-roseGold font-medium tracking-wide flex items-center justify-center gap-1.5 sm:gap-2">
+            <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
+            <span>Feito com Carinho</span>
+            <span class="text-brand-deepRose not-italic text-xs sm:text-lg">♥</span>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Parte 2: Botão Instagram Fixo -->
+    <div id="insta-suspenso" class="border-t border-brand-roseGold/10 py-2.5 flex justify-center items-center">
+      <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-medium text-brand-mocha hover:text-brand-roseGold transition-colors">
+        <span class="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-instagram-original text-white flex items-center justify-center shadow-sm flex-shrink-0">
+          <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current"><use href="#icone-instagram"></use></svg>
+        </span>
+        <span>Instagram</span>
+      </a>
     </div>
   </header>
 
-  <!-- ISOLAMENTO DE ROLAGEM: O conteúdo do site rola normalmente aqui dentro -->
+  <!-- ============================================== -->
+  <!-- CORPO DO SITE (ROLA PARA CIMA NORMALMENTE)     -->
+  <!-- ============================================== -->
   <main class="w-full overflow-x-hidden">
     
-    <!-- BARRA DE NAVEGAÇÃO: Fica abaixo do Logo, rola para cima normalmente -->
+    <!-- BARRA DE NAVEGAÇÃO SECUNDÁRIA (Links de página) -->
     <div class="relative z-20 w-full bg-brand-ivory/80 border-b border-brand-roseGold/20 py-3 px-3 sm:px-8">
       <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
         <span class="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-brand-taupe/90 font-medium text-center">
@@ -268,12 +288,6 @@
           <a href="#produtos" class="hover:text-brand-roseGold transition-colors whitespace-nowrap">Catálogo</a>
           <a href="#depoimentos" class="hover:text-brand-roseGold transition-colors whitespace-nowrap">Depoimentos</a>
           <a href="#como-funciona" class="hover:text-brand-roseGold transition-colors whitespace-nowrap">Como Pedir</a>
-          <a href="https://instagram.com/personalizando_por_amor" target="_blank" rel="noopener noreferrer" class="hover:text-brand-roseGold transition-colors inline-flex items-center gap-1.5 whitespace-nowrap">
-            <span class="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-instagram-original text-white flex items-center justify-center shadow-sm flex-shrink-0">
-              <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current"><use href="#icone-instagram"></use></svg>
-            </span>
-            <span>Instagram</span>
-          </a>
         </nav>
       </div>
     </div>
@@ -652,7 +666,7 @@
     </section>
 
     <!-- RODAPÉ -->
-    <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 pt-10 pb-16 sm:pb-10 px-4 sm:px-6 text-center text-sm">
+    <footer class="relative z-10 bg-brand-mocha text-brand-ivory/85 pt-10 pb-24 sm:pb-10 px-4 sm:px-6 text-center text-sm">
       <div class="whitespace-nowrap mb-1 flex items-baseline justify-center gap-2">
         <span class="font-script text-3xl sm:text-4xl text-brand-blush">Personalizando</span>
         <span class="font-serif text-base sm:text-xl font-medium uppercase tracking-[0.18em] text-brand-pearl">POR AMOR</span>
